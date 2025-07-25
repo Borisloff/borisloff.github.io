@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Лофф.Медиа</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      transition: background-color 0.3s, color 0.3s;
+    }
+  </style>
+</head>
+<body class="bg-green-50 dark:bg-green-950 text-green-900 dark:text-green-100 flex flex-col h-screen">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center p-4 bg-green-500 dark:bg-green-700 text-white shadow-md">
+    <h1 id="page-title" class="text-xl font-extrabold">Лофф.Медиа – Музыка</h1>
+    <a href="https://borisloff.ru" target="_blank" 
+       class="text-sm bg-green-800 hover:bg-green-900 px-3 py-1 rounded-full text-white transition">
+       Borisloff
+    </a>
+  </header>
+
+  <!-- Main content -->
+  <main class="flex-1 overflow-y-auto p-4">
+    <div id="cards-container" class="grid grid-cols-2 gap-4">
+      <!-- Карточки рендерятся сюда -->
+    </div>
+  </main>
+
+  <!-- Bottom navbar -->
+  <nav class="flex justify-around p-2 bg-green-500 dark:bg-green-700 fixed bottom-0 w-full border-t border-green-600">
+    <button class="flex flex-col items-center space-y-1 text-white active" data-section="music">
+      <span class="text-xl">🎵</span>
+      <small class="text-xs">Музыка</small>
+    </button>
+    <button class="flex flex-col items-center space-y-1 text-green-200" data-section="radio">
+      <span class="text-xl">📻</span>
+      <small class="text-xs">Радио</small>
+    </button>
+    <button class="flex flex-col items-center space-y-1 text-green-200" data-section="movies">
+      <span class="text-xl">🎬</span>
+      <small class="text-xs">Кино</small>
+    </button>
+    <button class="flex flex-col items-center space-y-1 text-green-200" data-section="video">
+      <span class="text-xl">📹</span>
+      <small class="text-xs">Видео</small>
+    </button>
+    <button class="flex flex-col items-center space-y-1 text-green-200" data-section="images">
+      <span class="text-xl">🖼</span>
+      <small class="text-xs">Картинки</small>
+    </button>
+  </nav>
+
+<script>
+  const sectionNames = {
+    music: "Музыка",
+    radio: "Радио",
+    movies: "Кино",
+    video: "Видео",
+    images: "Картинки"
+  };
+
+  // Данные ресурсов (оставляем прежние)
+  const resources = {
+    music: [
+      { name: "Zaycev.net", url: "https://zaycev.net", logo: "https://zaycev.net/favicon.ico", desc: "Бесплатная музыка и чарты" },
+      { name: "Z1.fm", url: "https://z1.fm", logo: "https://z1.fm/favicon.ico", desc: "Музыка онлайн без регистрации" },
+      { name: "VK Музыка", url: "https://vk.com/music", logo: "https://vk.com/images/music_logo.png", desc: "Музыка и плейлисты ВКонтакте" }
+    ],
+    radio: [
+      { name: "Online-Red.fm", url: "https://online-red.fm", logo: "https://online-red.fm/favicon.ico", desc: "Интернет-радиостанция" },
+      { name: "Europa Plus", url: "https://europaplus.ru", logo: "https://europaplus.ru/local/templates/main/build/images/favicon/favicon-196x196.png", desc: "Популярные хиты и эфиры" }
+    ],
+    movies: [
+      { name: "Filmix.quest", url: "https://filmix.quest", logo: "https://filmix.quest/static/logo.png", desc: "Фильмы и сериалы онлайн" },
+      { name: "HDrezka", url: "https://hdrezka.ag", logo: "https://hdrezka.ag/templates/hdrezka/images/logo.png", desc: "Популярные фильмы в HD" },
+      { name: "Dzen Видео", url: "https://dzen.ru/video", logo: "https://avatars.mds.yandex.net/get-bunker/50064/cae04b3dbbbef089b007534508f29ed2df8af9df/orig", desc: "Короткие ролики и фильмы" }
+    ],
+    video: [
+      { name: "VK Видео", url: "https://vk.com/video", logo: "https://vk.com/images/video_logo.png", desc: "Видео от ВКонтакте" },
+      { name: "Rutube", url: "https://rutube.ru", logo: "https://rutube.ru/static/images/favicons/favicon-96x96.png", desc: "Российская видеоплатформа" },
+      { name: "YouTube", url: "https://youtube.com", logo: "https://www.youtube.com/s/desktop/2b90f77a/img/favicon_144x144.png", desc: "Видео и трансляции со всего мира" }
+    ],
+    images: [
+      { name: "Яндекс Картинки", url: "https://yandex.ru/images", logo: "https://yandex.ru/images/touch-icon-ipad-retina.png", desc: "Поиск изображений" },
+      { name: "Pinterest", url: "https://pinterest.com", logo: "https://s.pinimg.com/webapp/logo_transparent_144x144.png", desc: "Идеи и подборки картинок" }
+    ]
+  };
+
+  const cardsContainer = document.getElementById("cards-container");
+  const navButtons = document.querySelectorAll("nav button");
+  const pageTitle = document.getElementById("page-title");
+
+  // Рендер карточек
+  function renderCards(section) {
+    cardsContainer.innerHTML = "";
+    const list = resources[section];
+    if (!list) {
+      cardsContainer.innerHTML = "<p>Раздел пуст.</p>";
+      return;
+    }
+    list.forEach(site => {
+      const card = document.createElement("div");
+      card.className = "bg-green-100 dark:bg-green-800 rounded-xl p-4 flex flex-col items-center hover:scale-105 hover:shadow-lg transition-transform duration-200 cursor-pointer";
+
+      card.innerHTML = `
+        <img src="${site.logo}" alt="${site.name}" class="w-20 h-20 mb-2 rounded-md object-cover bg-green-200 p-2" />
+        <h2 class="text-base font-semibold text-center">${site.name}</h2>
+        <p class="text-xs text-green-700 dark:text-green-300 text-center mt-1">${site.desc}</p>
+      `;
+
+      card.addEventListener("click", () => {
+        window.open(site.url, "_blank");
+      });
+
+      cardsContainer.appendChild(card);
+    });
+
+    // Меняем заголовок
+    pageTitle.textContent = `Лофф.Медиа – ${sectionNames[section]}`;
+  }
+
+  // Переключение разделов
+  navButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      navButtons.forEach(b => {
+        b.classList.remove("text-white");
+        b.classList.add("text-green-200");
+      });
+      btn.classList.remove("text-green-200");
+      btn.classList.add("text-white");
+
+      const section = btn.getAttribute("data-section");
+      renderCards(section);
+    });
+  });
+
+  // Стартовая загрузка
+  renderCards("music");
+</script>
+
+</body>
+</html>
