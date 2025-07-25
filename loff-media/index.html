@@ -20,12 +20,12 @@
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-green-300 to-lime-200 dark:bg-black text-green-900 dark:text-green-100 flex flex-col h-screen p-3 space-y-3">
+<body class="bg-gradient-to-br from-green-300 to-lime-200 dark:bg-black dark:bg-none text-green-900 dark:text-green-100 flex flex-col h-screen p-3 space-y-3">
 
   <!-- Header -->
   <header class="rounded-3xl flex justify-between items-center p-4 bg-green-600/80 dark:bg-green-900 text-white shadow-md">
     <h1 id="page-title" class="text-lg font-extrabold transition-all duration-300">Лофф.Медиа – Музыка</h1>
-    <a href="https://borisloff.ru" target="_blank" 
+    <a href="https://borisloff.github.io" target="_blank" 
        class="text-sm bg-green-900 hover:bg-green-950 px-3 py-1 rounded-full text-white transition">
        Borisloff
     </a>
@@ -79,27 +79,39 @@
 
   const resources = {
     music: [
+      { name: 'Яндекс Музыка', url: 'https://music.yandex.ru', logo: 'https://music.yandex.ru/favicon.ico', desc: 'Отличные рекомендации, тексты песен, losless при подписке'},
       { name: "Zaycev.net", url: "https://zaycev.net", logo: "https://zaycev.net/favicon.ico", desc: "Бесплатная музыка и чарты" },
-      { name: "Z1.fm", url: "https://z1.fm", logo: "https://z1.fm/favicon.ico", desc: "Музыка онлайн без регистрации" },
-      { name: "VK Музыка", url: "https://vk.com/music", logo: "https://vk.com/images/music_logo.png", desc: "Музыка и плейлисты ВКонтакте" }
+      { name: 'СберЗвук', url: 'https://zvuk.com', logo: 'https://zvuk.com/favicon.ico', desc: 'Более 40 млн композиций, losless, подкасты, аудиокниги'},
+      { name: "Hitmo", url: "https://rus.hitmotop.com", logo: "https://rus.hitmotop.com/favicon.ico", desc: "Бесплатный музыкальный сервис с большим выбором треков онлайн" },
+      { name: "VK Музыка", url: "https://vk.com/audio", logo: "https://music.vk.com/favicon.ico", desc: "Музыка и плейлисты ВКонтакте" },
+      { name: 'RuTube Музыка', url: 'https://rutube.ru/feeds/music/', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Rutube_icon.svg', desc: 'Треки и клипы, размещенные на площадке RuTube'}
     ],
     radio: [
-      { name: "Online-Red.fm", url: "https://online-red.fm", logo: "https://online-red.fm/favicon.ico", desc: "Интернет-радиостанция" },
-      { name: "Europa Plus", url: "https://europaplus.ru", logo: "https://europaplus.ru/local/templates/main/build/images/favicon/favicon-196x196.png", desc: "Популярные хиты и эфиры" }
+      { name: "Europa Plus", url: "https://europaplus.ru", logo: "https://toplogos.ru/images/thumbs/preview-logo-europa-plus.png", desc: "Первая частная радиостанция России, предлагает хиты поп-музыки и актуальные чарты" },
+      { name: "Online Red FM", url: "https://online-red.fm", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b7/RedFM_logo.svg", desc: "Онлайн-радио с разнообразными жанрами и прямыми эфирами" },
+      { name: 'Ретро FM', url: 'https://retrofm.ru', logo: 'https://avatars.mds.yandex.net/i?id=5a36104da1a5a0a1132a171c3e6ec7dd_l-5166690-images-thumbs&n=13', desc: 'Хиты 70-90, ностальгия, музыка поколений'},
+      { name: 'Радиопоток', url: 'https://radiopotok.ru/russia', logo: 'https://radiopotok.ru/favicon.ico', desc: 'Каталог 1000+ онлайн-радиостанций бесплатно, без регистрации'},
+      { name: 'Record', url: 'https://www.radiorecord.ru', logo: 'https://i.iheart.com/v3/url/aHR0cDovL3JhZGlvcmVjb3JkLnJ1L3VwbG9hZC9yci1sb2dvLXBvZGNhc3QuanBn', desc: 'Танцевальная радиостанция с 1995 года, EDM, фестивали'},
+      { name: 'Топ Радио', url: 'https://top-radio.ru', logo: 'https://ts4.mm.bing.net/th?id=OIP.Rp6a38GWk9XTTBahsNWENAHaHa&pid=15.1', desc: 'Онлайн-платформа с 2000+ радиостанциями по всему миру'}
     ],
     movies: [
-      { name: "Filmix.quest", url: "https://filmix.quest", logo: "https://filmix.quest/static/logo.png", desc: "Фильмы и сериалы онлайн" },
-      { name: "HDrezka", url: "https://hdrezka.ag", logo: "https://hdrezka.ag/templates/hdrezka/images/logo.png", desc: "Популярные фильмы в HD" },
-      { name: "Dzen Видео", url: "https://dzen.ru/video", logo: "https://avatars.mds.yandex.net/get-bunker/50064/cae04b3dbbbef089b007534508f29ed2df8af9df/orig", desc: "Короткие ролики и фильмы" }
+      { name: 'RuTube Кино', url: 'https://rutube.ru/feeds/movies', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Rutube_icon.svg', desc: 'Фильмы и сериалы, размещенные на площадке RuTube'},
+      { name: "Filmix", url: "https://filmix.quest", logo: "https://filmix.quest/favicon.ico", desc: "Большой онлайн-кинотеатр: фильмы, сериалы, HD-качество, обновления ежедневно" },
+      { name: 'КиноПоиск', url: 'https://kinopoisk.ru', logo: 'https://www.kinopoisk.ru/favicon.ico', desc: 'Онлайн-кинотеатр Яндекса, требует подписку Яндекс Плюс'},
+      { name: "HDRezka", url: "https://hdrezkaonline.net", logo: "https://avatars.mds.yandex.net/i?id=57e29acd0cbf0fe1824cdd3050253404_l-4143030-images-thumbs&n=13", desc: "Популярные фильмы в HD" },
+      { name: "START", url: "https://start.ru", logo: "https://start.ru/favicon.ico", desc: "Российский онлайн-кинотеатр с сериалами и фильмами, требует подписку" },
+      { name: 'BigFilm', url: 'https://bigfilm.tv', logo: 'https://play-lh.googleusercontent.com/d1YpyTEnABiuw_iKL1kCz7CJqdxrcnhFqjAbKwTK68j_M2dtGwBfaREvV56Fdn22OkY=w480-h960', desc: 'Онлайн-кинотеатр с ТВ-каналами и премиум-фильмами, требует регистрацию'}
     ],
     video: [
-      { name: "VK Видео", url: "https://vk.com/video", logo: "https://vk.com/images/video_logo.png", desc: "Видео от ВКонтакте" },
-      { name: "Rutube", url: "https://rutube.ru", logo: "https://rutube.ru/static/images/favicons/favicon-96x96.png", desc: "Российская видеоплатформа" },
-      { name: "YouTube", url: "https://youtube.com", logo: "https://www.youtube.com/s/desktop/2b90f77a/img/favicon_144x144.png", desc: "Видео и трансляции со всего мира" }
+      { name: "VK Видео", url: "https://vkvideo.ru", logo: "https://3ab0ed31-049c5350-6544-4365-ae7e-6e7e2957eeea.s3.timeweb.cloud/iblock/e3c/e3c532b6e28ef0c2786ec49561a2ca7d/76ebe403cc412ed242a83d2642dd9559.webp", desc: "Популярный видеохостинг ВКонтакте: ролики, шоу, музыка бесплатно" },
+      { name: "RuTube", url: "https://rutube.ru", logo: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Rutube_icon.svg", desc: "Российская видеоплатформа" },
+      { name: "Дзен", url: "https://dzen.ru/video", logo: "https://dzen.ru/favicon.ico", desc: "Смотрите видео от любимых блогеров" },
+      { name: 'VK Клипы', url: 'https://vkvideo.ru/clips', logo: 'https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/62/0d/fe/620dfeb6-c875-8b24-de71-bbfc4ac98423/AppIcon-0-0-1x_U007emarketing-0-7-0-P3-85-220.png/1200x600wa.png', desc: 'Короткие вертикальные ролики, тренды, музыка, интеграция ВКонтакте'}
     ],
     images: [
-      { name: "Яндекс Картинки", url: "https://yandex.ru/images", logo: "https://yandex.ru/images/touch-icon-ipad-retina.png", desc: "Поиск изображений" },
-      { name: "Pinterest", url: "https://pinterest.com", logo: "https://s.pinimg.com/webapp/logo_transparent_144x144.png", desc: "Идеи и подборки картинок" }
+      { name: "Яндекс Картинки", url: "https://yandex.ru/images", logo: "https://upload.wikimedia.org/wikipedia/commons/5/58/Yandex_icon.svg", desc: "Поиск изображений от Яндекс" },
+      { name: "Pinterest", url: "https://pinterest.com", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Pinterest.svg", desc: "Идеи и подборки картинок" },
+      { name: 'Google Картинки', url: 'https://images.google.com/', logo: 'https://i.pinimg.com/474x/23/6d/a9/236da9ee082e000fee34f72d84f7bd59.jpg?nii=t', desc: "Поиск изображений от Google"}
     ]
   };
 
