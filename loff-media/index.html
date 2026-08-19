@@ -89,11 +89,6 @@
       text-decoration: none;
     }
 
-
-    /* =========================================
-       APP
-    ========================================= */
-
     .app {
       width: min(1250px, 100%);
       min-height: 100vh;
@@ -108,10 +103,7 @@
       gap: 10px;
     }
 
-
-    /* =========================================
-       HEADER
-    ========================================= */
+    /* HEADER */
 
     .header {
       display: flex;
@@ -198,10 +190,7 @@
       transform: translateY(-1px);
     }
 
-
-    /* =========================================
-       INFO
-    ========================================= */
+    /* INFO */
 
     .info-panel {
       display: grid;
@@ -255,20 +244,28 @@
       font-size: 9px;
     }
 
-    .weather-value {
+    .last-service {
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .weather-icon {
-      font-size: 22px;
+    .last-service-icon {
+      width: 31px;
+      height: 31px;
+
+      border-radius: 8px;
+
+      object-fit: contain;
+
+      background: var(--surface-2);
+
+      border: 1px solid var(--border);
+
+      padding: 5px;
     }
 
-
-    /* =========================================
-       SEARCH
-    ========================================= */
+    /* SEARCH */
 
     .search-box {
       display: flex;
@@ -390,10 +387,7 @@
       transform: scale(.97);
     }
 
-
-    /* =========================================
-       CATEGORY NAV
-    ========================================= */
+    /* CATEGORY NAV */
 
     .category-nav {
       display: flex;
@@ -455,10 +449,7 @@
       font-size: 13px;
     }
 
-
-    /* =========================================
-       CONTENT
-    ========================================= */
+    /* CONTENT */
 
     .content {
       padding: 18px;
@@ -502,10 +493,7 @@
       font-size: 9px;
     }
 
-
-    /* =========================================
-       CARDS
-    ========================================= */
+    /* CARDS */
 
     .cards {
       display: grid;
@@ -601,7 +589,13 @@
       font-weight: 850;
     }
 
-    .service-arrow {
+    .service-actions {
+      display: flex;
+      gap: 5px;
+    }
+
+    .service-arrow,
+    .favorite-button {
       width: 26px;
       height: 26px;
 
@@ -618,7 +612,22 @@
 
       transition:
         background .2s,
-        color .2s;
+        color .2s,
+        transform .2s;
+    }
+
+    .favorite-button {
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .favorite-button:hover {
+      transform: scale(1.08);
+    }
+
+    .favorite-button.active {
+      color: var(--cream);
+      background: var(--primary);
     }
 
     .service:hover .service-arrow {
@@ -650,12 +659,11 @@
       line-height: 1.5;
     }
 
-
-    /* =========================================
-       EMPTY
-    ========================================= */
+    /* EMPTY */
 
     .empty {
+      grid-column: 1 / -1;
+
       padding: 50px 15px;
 
       text-align: center;
@@ -681,10 +689,7 @@
       font-size: 10px;
     }
 
-
-    /* =========================================
-       FOOTER
-    ========================================= */
+    /* FOOTER */
 
     .footer {
       padding: 4px 4px 8px;
@@ -702,10 +707,45 @@
       font-weight: 700;
     }
 
+    /* TOAST */
 
-    /* =========================================
-       MOBILE
-    ========================================= */
+    .toast {
+      position: fixed;
+
+      left: 50%;
+      bottom: 22px;
+
+      transform:
+        translate(-50%, 20px);
+
+      padding: 10px 15px;
+
+      background: var(--primary);
+      color: var(--bg);
+
+      border-radius: 11px;
+
+      font-size: 10px;
+      font-weight: 750;
+
+      opacity: 0;
+      pointer-events: none;
+
+      transition:
+        opacity .2s,
+        transform .2s;
+
+      z-index: 100;
+    }
+
+    .toast.show {
+      opacity: 1;
+
+      transform:
+        translate(-50%, 0);
+    }
+
+    /* MOBILE */
 
     @media (max-width: 900px) {
 
@@ -715,7 +755,6 @@
       }
 
     }
-
 
     @media (max-width: 680px) {
 
@@ -744,7 +783,6 @@
 
     }
 
-
     @media (max-width: 480px) {
 
       .header {
@@ -766,10 +804,6 @@
 
       .info-value {
         font-size: 14px;
-      }
-
-      .weather-icon {
-        font-size: 18px;
       }
 
       .search-box {
@@ -813,7 +847,6 @@
 
     }
 
-
     @media (max-width: 350px) {
 
       .cards {
@@ -836,11 +869,9 @@
   </style>
 </head>
 
-
 <body>
 
 <div class="app">
-
 
   <!-- HEADER -->
 
@@ -863,7 +894,6 @@
       </div>
 
     </div>
-
 
     <div class="header-actions">
 
@@ -914,19 +944,17 @@
     <div class="info-card">
 
       <div class="info-label">
-        Ваше местоположение
+        Каталог
       </div>
 
       <div
         class="info-value"
-        id="city">
-        Определяем...
+        id="service-count">
+        -- сервисов
       </div>
 
-      <div
-        class="info-small"
-        id="country">
-        По IP
+      <div class="info-small">
+        Музыка, кино, игры, софт и другое
       </div>
 
     </div>
@@ -935,31 +963,16 @@
     <div class="info-card">
 
       <div class="info-label">
-        Погода
+        Последний визит
       </div>
 
-      <div class="weather-value">
+      <div
+        class="last-service"
+        id="last-service">
 
-        <span
-          class="weather-icon"
-          id="weather-icon">
-          ·
-        </span>
-
-        <div>
-
-          <div
-            class="info-value"
-            id="temperature">
-            --
-          </div>
-
-          <div
-            class="info-small"
-            id="weather-description">
-            Загружаем...
-          </div>
-
+        <div
+          class="info-value">
+          Пока пусто
         </div>
 
       </div>
@@ -999,7 +1012,6 @@
 
     </div>
 
-
     <div class="search-input-wrap">
 
       <span class="search-symbol">
@@ -1013,7 +1025,6 @@
         autocomplete="off">
 
     </div>
-
 
     <button
       class="search-submit"
@@ -1029,6 +1040,11 @@
   <nav
     class="category-nav"
     id="category-nav">
+
+    <button class="category" data-section="favorites">
+      <span class="category-icon">★</span>
+      Избранное
+    </button>
 
     <button class="category active" data-section="music">
       <span class="category-icon">♪</span>
@@ -1100,7 +1116,6 @@
 
       </div>
 
-
       <span
         class="section-count"
         id="section-count">
@@ -1132,6 +1147,12 @@
 </div>
 
 
+<div
+  class="toast"
+  id="toast">
+</div>
+
+
 <script>
 
   /* =====================================================
@@ -1145,255 +1166,169 @@
       description: "Музыкальные сервисы и площадки",
 
       items: [
-
         ["Яндекс Музыка", "https://music.yandex.ru", "https://music.yandex.ru/favicon.ico", "Музыка, рекомендации, плейлисты и подкасты."],
-
         ["Звук", "https://zvuk.com", "https://zvuk.com/favicon.ico", "Музыка, подкасты и аудиокниги."],
-
         ["VK Музыка", "https://vk.com/audio", "https://music.vk.com/favicon.ico", "Музыка и плейлисты ВКонтакте."],
-
         ["Spotify", "https://open.spotify.com", "https://open.spotify.com/favicon.ico", "Музыка, альбомы и персональные рекомендации."],
-
         ["Apple Music", "https://music.apple.com", "https://music.apple.com/favicon.ico", "Музыка и эксклюзивные релизы Apple."],
-
         ["YouTube Music", "https://music.youtube.com", "https://music.youtube.com/favicon.ico", "Музыка и клипы от YouTube."],
-
         ["SoundCloud", "https://soundcloud.com", "https://soundcloud.com/favicon.ico", "Музыка независимых исполнителей."],
-
         ["Bandcamp", "https://bandcamp.com", "https://bandcamp.com/favicon.ico", "Музыка независимых артистов и лейблов."],
-
         ["Last.fm", "https://www.last.fm", "https://www.last.fm/favicon.ico", "Статистика прослушиваний и музыкальные рекомендации."],
-
         ["Zaycev.net", "https://zaycev.net", "https://zaycev.net/favicon.ico", "Музыка и чарты."],
-
         ["Hitmo", "https://rus.hitmotop.com", "https://rus.hitmotop.com/favicon.ico", "Большой музыкальный каталог."],
-
         ["Deezer", "https://www.deezer.com", "https://www.deezer.com/favicon.ico", "Музыка, миксы и персональные рекомендации."]
-
       ]
     },
-
 
     radio: {
       title: "Радио",
       description: "Радиостанции и онлайн-эфиры",
 
       items: [
-
         ["Радио Record", "https://www.radiorecord.ru", "https://www.radiorecord.ru/favicon.ico", "EDM и танцевальная музыка."],
-
         ["Европа Плюс", "https://europaplus.ru/live", "https://toplogos.ru/images/thumbs/preview-logo-europa-plus.png", "Поп-музыка и актуальные хиты."],
-
         ["Ретро FM", "https://retrofm.ru", "https://retrofm.ru/favicon.ico", "Музыка 70-х, 80-х и 90-х."],
-
         ["Авторадио", "https://www.avtoradio.ru", "https://www.avtoradio.ru/favicon.ico", "Музыка, новости и прямой эфир."],
-
         ["Русское Радио", "https://rusradio.ru", "https://rusradio.ru/favicon.ico", "Российская поп-музыка."],
-
         ["Наше Радио", "https://nashe.ru", "https://nashe.ru/favicon.ico", "Русский рок и альтернативная музыка."],
-
         ["Maximum", "https://maximum.ru", "https://maximum.ru/favicon.ico", "Рок и современная музыка."],
-
-        ["Радио ENERGY", "https://radiovector.ru", "https://radiovector.ru/favicon.ico", "Популярная музыка и хиты."],
-
         ["DFM", "https://dfm.ru", "https://dfm.ru/favicon.ico", "Танцевальная музыка."],
-
         ["Радиопоток", "https://radiopotok.ru/russia", "https://radiopotok.ru/favicon.ico", "Каталог онлайн-радиостанций."],
-
         ["TuneIn", "https://tunein.com", "https://tunein.com/favicon.ico", "Радиостанции со всего мира."],
-
         ["Radio Garden", "https://radio.garden", "https://radio.garden/favicon.ico", "Радиостанции на интерактивной карте мира."]
-
       ]
     },
-
 
     movies: {
       title: "Кино",
       description: "Онлайн-кинотеатры и каталоги",
 
       items: [
-
         ["Кинопоиск", "https://www.kinopoisk.ru", "https://www.kinopoisk.ru/favicon.ico", "Фильмы, сериалы, оценки и обзоры."],
-
         ["Иви", "https://www.ivi.ru", "https://www.ivi.ru/favicon.ico", "Онлайн-кинотеатр с фильмами и сериалами."],
-
         ["Okko", "https://okko.tv", "https://okko.tv/favicon.ico", "Фильмы, сериалы и спортивные трансляции."],
-
         ["START", "https://start.ru", "https://start.ru/favicon.ico", "Российские сериалы и фильмы."],
-
         ["Wink", "https://wink.ru", "https://wink.ru/favicon.ico", "Кино, сериалы и телеканалы."],
-
         ["KION", "https://kion.ru", "https://kion.ru/favicon.ico", "Фильмы, сериалы и оригинальные проекты."],
-
         ["PREMIER", "https://premier.one", "https://premier.one/favicon.ico", "Фильмы, сериалы и шоу."],
-
         ["Apple TV", "https://tv.apple.com", "https://tv.apple.com/favicon.ico", "Фильмы и оригинальные сериалы Apple."],
-
         ["IMDb", "https://www.imdb.com", "https://www.imdb.com/favicon.ico", "Мировая база фильмов, сериалов и актёров."],
-
         ["Letterboxd", "https://letterboxd.com", "https://letterboxd.com/favicon.ico", "Дневник фильмов и социальная сеть киноманов."]
-
       ]
     },
-
 
     video: {
       title: "Видео",
       description: "Видеохостинги и площадки",
 
       items: [
-
         ["YouTube", "https://www.youtube.com", "https://www.youtube.com/favicon.ico", "Крупнейшая видеоплатформа."],
-
         ["VK Видео", "https://vkvideo.ru", "https://vkvideo.ru/favicon.ico", "Видео, шоу и авторский контент."],
-
         ["RuTube", "https://rutube.ru", "https://rutube.ru/favicon.ico", "Российская видеоплатформа."],
-
         ["Дзен", "https://dzen.ru/video", "https://dzen.ru/favicon.ico", "Видео от блогеров и авторов."],
-
         ["Twitch", "https://www.twitch.tv", "https://www.twitch.tv/favicon.ico", "Прямые трансляции и игровые стримы."],
-
         ["Vimeo", "https://vimeo.com", "https://vimeo.com/favicon.ico", "Профессиональное видео."],
-
         ["Dailymotion", "https://www.dailymotion.com", "https://www.dailymotion.com/favicon.ico", "Видео и новости."],
-
         ["VK Клипы", "https://vkvideo.ru/clips", "https://vkvideo.ru/favicon.ico", "Короткие вертикальные ролики."]
-
       ]
     },
-
 
     images: {
       title: "Картинки",
       description: "Поиск изображений и визуальные платформы",
 
       items: [
-
         ["Яндекс Картинки", "https://yandex.ru/images", "https://yandex.ru/favicon.ico", "Поиск изображений Яндекса."],
-
         ["Google Картинки", "https://images.google.com", "https://www.google.com/favicon.ico", "Поиск изображений Google."],
-
         ["Pinterest", "https://www.pinterest.com", "https://www.pinterest.com/favicon.ico", "Идеи, подборки и вдохновение."],
-
         ["Unsplash", "https://unsplash.com", "https://unsplash.com/favicon.ico", "Бесплатные фотографии."],
-
         ["Pexels", "https://www.pexels.com", "https://www.pexels.com/favicon.ico", "Фото и видео."],
-
         ["Pixabay", "https://pixabay.com", "https://pixabay.com/favicon.ico", "Бесплатные изображения и видео."],
-
         ["ArtStation", "https://www.artstation.com", "https://www.artstation.com/favicon.ico", "Работы художников и 3D-артистов."],
-
         ["Behance", "https://www.behance.net", "https://www.behance.net/favicon.ico", "Портфолио дизайнеров и творческих студий."]
-
       ]
     },
-
 
     books: {
       title: "Книги",
       description: "Книги, библиотеки и электронное чтение",
 
       items: [
-
         ["ЛитРес", "https://www.litres.ru", "https://www.litres.ru/favicon.ico", "Электронные и аудиокниги."],
-
         ["MyBook", "https://mybook.ru", "https://mybook.ru/favicon.ico", "Электронная библиотека."],
-
         ["Google Books", "https://books.google.com", "https://books.google.com/favicon.ico", "Поиск книг и публикаций."],
-
         ["Project Gutenberg", "https://www.gutenberg.org", "https://www.gutenberg.org/favicon.ico", "Бесплатная библиотека классики."],
-
         ["Internet Archive", "https://archive.org", "https://archive.org/favicon.ico", "Цифровая библиотека интернета."],
-
         ["Author.Today", "https://author.today", "https://author.today/favicon.ico", "Книги современных авторов."]
-
       ]
     },
-
 
     podcasts: {
       title: "Подкасты",
       description: "Подкасты, шоу и аудиопрограммы",
 
       items: [
-
         ["Яндекс Музыка", "https://music.yandex.ru", "https://music.yandex.ru/favicon.ico", "Подкасты и аудиошоу."],
-
         ["Звук", "https://zvuk.com", "https://zvuk.com/favicon.ico", "Подкасты и аудиоконтент."],
-
         ["Spotify", "https://open.spotify.com", "https://open.spotify.com/favicon.ico", "Подкасты и музыка."],
-
         ["Apple Podcasts", "https://podcasts.apple.com", "https://podcasts.apple.com/favicon.ico", "Подкасты Apple."],
-
         ["Castbox", "https://castbox.fm", "https://castbox.fm/favicon.ico", "Каталог подкастов."],
-
         ["SoundCloud", "https://soundcloud.com", "https://soundcloud.com/favicon.ico", "Аудиошоу и независимые авторы."]
-
       ]
     },
-
 
     games: {
       title: "Игры",
       description: "Игровые магазины и сервисы",
 
       items: [
-
         ["Steam", "https://store.steampowered.com", "https://store.steampowered.com/favicon.ico", "Игры, магазин и игровое сообщество."],
-
         ["Epic Games", "https://store.epicgames.com", "https://store.epicgames.com/favicon.ico", "Игровой магазин Epic Games."],
-
         ["GOG", "https://www.gog.com", "https://www.gog.com/favicon.ico", "Игры без DRM."],
-
         ["Xbox", "https://www.xbox.com", "https://www.xbox.com/favicon.ico", "Игры и сервисы Xbox."],
-
         ["PlayStation", "https://www.playstation.com", "https://www.playstation.com/favicon.ico", "Игры и сервисы PlayStation."],
-
         ["Nintendo", "https://www.nintendo.com", "https://www.nintendo.com/favicon.ico", "Игры и продукты Nintendo."],
-
         ["itch.io", "https://itch.io", "https://itch.io/favicon.ico", "Инди-игры и разработчики."],
-
         ["HowLongToBeat", "https://howlongtobeat.com", "https://howlongtobeat.com/favicon.ico", "Сколько времени займёт прохождение игры."]
-
       ]
     },
-
 
     software: {
       title: "Софт",
       description: "Программы, инструменты и сервисы для работы",
 
       items: [
-
         ["GitHub", "https://github.com", "https://github.com/favicon.ico", "Код, репозитории и проекты."],
-
         ["GitLab", "https://gitlab.com", "https://gitlab.com/favicon.ico", "DevOps и репозитории."],
-
         ["Figma", "https://www.figma.com", "https://www.figma.com/favicon.ico", "Дизайн интерфейсов."],
-
         ["Canva", "https://www.canva.com", "https://www.canva.com/favicon.ico", "Онлайн-дизайн и графика."],
-
         ["Google Docs", "https://docs.google.com", "https://docs.google.com/favicon.ico", "Онлайн-документы."],
-
         ["Google Drive", "https://drive.google.com", "https://drive.google.com/favicon.ico", "Облачное хранилище."],
-
         ["Notion", "https://www.notion.so", "https://www.notion.so/favicon.ico", "Заметки, документы и базы данных."],
-
         ["CodePen", "https://codepen.io", "https://codepen.io/favicon.ico", "Песочница для веб-разработки."],
-
         ["JSFiddle", "https://jsfiddle.net", "https://jsfiddle.net/favicon.ico", "Онлайн-редактор HTML, CSS и JS."],
-
         ["Stack Overflow", "https://stackoverflow.com", "https://stackoverflow.com/favicon.ico", "Вопросы и ответы для разработчиков."],
-
         ["Python", "https://www.python.org", "https://www.python.org/favicon.ico", "Официальный сайт Python."],
-
         ["MDN Web Docs", "https://developer.mozilla.org", "https://developer.mozilla.org/favicon.ico", "Документация по веб-технологиям."]
-
       ]
     }
-
   };
+
+
+  /* =====================================================
+     STATE
+  ===================================================== */
+
+  let favorites =
+    JSON.parse(
+      localStorage.getItem("loffFavorites") || "[]"
+    );
+
+  let currentSection =
+    localStorage.getItem("loffMediaSection") || "music";
+
+  let currentQuery = "";
 
 
   /* =====================================================
@@ -1412,24 +1347,250 @@
   const sectionCount =
     document.getElementById("section-count");
 
+  const serviceCount =
+    document.getElementById("service-count");
+
+  const lastService =
+    document.getElementById("last-service");
+
 
   /* =====================================================
-     STATE
+     HELPERS
   ===================================================== */
 
-  let currentSection =
-    localStorage.getItem("loffMediaSection")
-    || "music";
+  function allServices() {
+
+    return Object.values(sections)
+      .flatMap(section => section.items);
+
+  }
 
 
-  let currentQuery = "";
+  function isFavorite(url) {
+
+    return favorites.includes(url);
+
+  }
+
+
+  function saveFavorites() {
+
+    localStorage.setItem(
+      "loffFavorites",
+      JSON.stringify(favorites)
+    );
+
+  }
+
+
+  function toggleFavorite(url) {
+
+    if (isFavorite(url)) {
+
+      favorites =
+        favorites.filter(
+          item => item !== url
+        );
+
+      showToast("Убрано из избранного");
+
+    } else {
+
+      favorites.push(url);
+
+      showToast("Добавлено в избранное");
+
+    }
+
+    saveFavorites();
+
+    render(
+      currentSection,
+      currentQuery
+    );
+
+    updateStats();
+
+  }
+
+
+  function showToast(text) {
+
+    const toast =
+      document.getElementById("toast");
+
+    toast.textContent = text;
+
+    toast.classList.add("show");
+
+    clearTimeout(
+      window.toastTimer
+    );
+
+    window.toastTimer =
+      setTimeout(() => {
+
+        toast.classList.remove("show");
+
+      }, 1700);
+
+  }
+
+
+  function escapeHTML(value) {
+
+    return value
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+  }
+
+
+  /* =====================================================
+     STATS
+  ===================================================== */
+
+  function updateStats() {
+
+    const total =
+      allServices().length;
+
+    serviceCount.textContent =
+      `${total} сервис`;
+
+  }
+
+
+  /* =====================================================
+     LAST SERVICE
+  ===================================================== */
+
+  function updateLastService() {
+
+    const url =
+      localStorage.getItem(
+        "loffLastService"
+      );
+
+    if (!url) {
+
+      lastService.innerHTML = `
+        <div>
+          <div class="info-value">
+            Пока пусто
+          </div>
+
+          <div class="info-small">
+            Открытые сервисы появятся здесь
+          </div>
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    const service =
+      allServices()
+        .find(item => item[1] === url);
+
+
+    if (!service) {
+
+      lastService.innerHTML = `
+        <div class="info-value">
+          Пока пусто
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    const [
+      name,
+      serviceUrl,
+      logo
+    ] = service;
+
+
+    lastService.innerHTML = `
+
+      <img
+        class="last-service-icon"
+        src="${logo}"
+        alt=""
+        onerror="this.style.display='none'">
+
+      <div>
+
+        <div
+          class="info-value"
+          style="font-size:12px">
+          ${escapeHTML(name)}
+        </div>
+
+        <div class="info-small">
+          Открыть ↗
+        </div>
+
+      </div>
+
+    `;
+
+
+    lastService.onclick =
+      () => openService(service);
+
+    lastService.style.cursor =
+      "pointer";
+
+  }
+
+
+  /* =====================================================
+     OPEN SERVICE
+  ===================================================== */
+
+  function openService(item) {
+
+    const [
+      name,
+      url
+    ] = item;
+
+
+    localStorage.setItem(
+      "loffLastService",
+      url
+    );
+
+
+    updateLastService();
+
+
+    window.open(
+      url,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+  }
 
 
   /* =====================================================
      RENDER
   ===================================================== */
 
-  function render(section, query = "") {
+  function render(
+    section,
+    query = ""
+  ) {
 
     currentSection = section;
     currentQuery = query;
@@ -1440,8 +1601,35 @@
     );
 
 
-    const data =
-      sections[section];
+    let data;
+
+
+    if (section === "favorites") {
+
+      data = {
+
+        title: "Избранное",
+
+        description:
+          "Ваши сохранённые сервисы",
+
+        items:
+          allServices()
+            .filter(
+              item => isFavorite(item[1])
+            )
+
+      };
+
+    } else {
+
+      data =
+        sections[section];
+
+    }
+
+
+    if (!data) return;
 
 
     sectionTitle.textContent =
@@ -1483,25 +1671,54 @@
 
     if (!filtered.length) {
 
-      cards.innerHTML = `
+      if (
+        section === "favorites"
+      ) {
 
-        <div class="empty">
+        cards.innerHTML = `
 
-          <div class="empty-icon">
-            ⌕
+          <div class="empty">
+
+            <div class="empty-icon">
+              ★
+            </div>
+
+            <div class="empty-title">
+              Здесь пока пусто
+            </div>
+
+            <div class="empty-text">
+              Нажми ★ на любом сервисе,
+              чтобы добавить его сюда.
+            </div>
+
           </div>
 
-          <div class="empty-title">
-            Ничего не найдено
+        `;
+
+      } else {
+
+        cards.innerHTML = `
+
+          <div class="empty">
+
+            <div class="empty-icon">
+              ⌕
+            </div>
+
+            <div class="empty-title">
+              Ничего не найдено
+            </div>
+
+            <div class="empty-text">
+              Попробуй изменить поисковый запрос.
+            </div>
+
           </div>
 
-          <div class="empty-text">
-            Попробуй изменить поисковый запрос.
-          </div>
+        `;
 
-        </div>
-
-      `;
+      }
 
       return;
 
@@ -1559,7 +1776,9 @@
               "service-logo-fallback";
 
             fallback.textContent =
-              name.charAt(0).toUpperCase();
+              name
+                .charAt(0)
+                .toUpperCase();
 
 
             this.replaceWith(
@@ -1575,9 +1794,33 @@
 
             <div class="logo-placeholder"></div>
 
-            <span class="service-arrow">
-              ↗
-            </span>
+            <div class="service-actions">
+
+              <button
+                class="favorite-button ${
+                  isFavorite(url)
+                    ? "active"
+                    : ""
+                }"
+                title="${
+                  isFavorite(url)
+                    ? "Убрать из избранного"
+                    : "Добавить в избранное"
+                }">
+
+                ${
+                  isFavorite(url)
+                    ? "★"
+                    : "☆"
+                }
+
+              </button>
+
+              <span class="service-arrow">
+                ↗
+              </span>
+
+            </div>
 
           </div>
 
@@ -1599,18 +1842,34 @@
 
         card
           .querySelector(".logo-placeholder")
-          .replaceWith(logoElement);
+          .replaceWith(
+            logoElement
+          );
+
+
+        const favoriteButton =
+          card.querySelector(
+            ".favorite-button"
+          );
+
+
+        favoriteButton.addEventListener(
+          "click",
+          event => {
+
+            event.stopPropagation();
+
+            toggleFavorite(url);
+
+          }
+        );
 
 
         card.addEventListener(
           "click",
           () => {
 
-            window.open(
-              url,
-              "_blank",
-              "noopener,noreferrer"
-            );
+            openService(item);
 
           }
         );
@@ -1625,23 +1884,7 @@
 
 
   /* =====================================================
-     ESCAPE HTML
-  ===================================================== */
-
-  function escapeHTML(value) {
-
-    return value
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-
-  }
-
-
-  /* =====================================================
-     CATEGORY
+     CATEGORY NAV
   ===================================================== */
 
   document
@@ -1682,50 +1925,7 @@
 
 
   /* =====================================================
-     LOCAL SEARCH
-  ===================================================== */
-
-  const localSearch =
-    document.createElement("input");
-
-  /*
-    Не добавляем отдельное поле:
-    используем Ctrl+K для поиска
-    внутри выбранного раздела.
-  */
-
-
-  document.addEventListener(
-    "keydown",
-    event => {
-
-      if (
-        (event.ctrlKey || event.metaKey) &&
-        event.key.toLowerCase() === "k"
-      ) {
-
-        event.preventDefault();
-
-        document
-          .getElementById("web-search")
-          .focus();
-
-      }
-
-    }
-  );
-
-
-  /*
-    Поиск сверху — веб-поиск.
-    Поэтому фильтр каталога оставляем
-    через /?section=music&search=...
-    при необходимости можно расширить.
-  */
-
-
-  /* =====================================================
-     WEB SEARCH
+     SEARCH
   ===================================================== */
 
   const searchForm =
@@ -1814,6 +2014,29 @@
 
 
   /* =====================================================
+     CTRL + K
+  ===================================================== */
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        (event.ctrlKey || event.metaKey) &&
+        event.key.toLowerCase() === "k"
+      ) {
+
+        event.preventDefault();
+
+        webSearch.focus();
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
      THEME
   ===================================================== */
 
@@ -1890,6 +2113,10 @@
   }
 
 
+  /* =====================================================
+     INITIAL
+  ===================================================== */
+
   updateDateTime();
 
   setInterval(
@@ -1898,232 +2125,10 @@
   );
 
 
-  /* =====================================================
-     IP LOCATION
-  ===================================================== */
+  updateStats();
 
-  async function loadLocation() {
+  updateLastService();
 
-    const cityElement =
-      document.getElementById("city");
-
-    const countryElement =
-      document.getElementById("country");
-
-
-    try {
-
-      const response =
-        await fetch(
-          "https://ipapi.co/json/"
-        );
-
-
-      if (!response.ok) {
-        throw new Error(
-          "Location unavailable"
-        );
-      }
-
-
-      const data =
-        await response.json();
-
-
-      const city =
-        data.city || "Неизвестно";
-
-
-      cityElement.textContent =
-        city;
-
-
-      countryElement.textContent =
-        data.country_name
-          ? data.country_name
-          : "По IP";
-
-
-      if (
-        data.latitude &&
-        data.longitude
-      ) {
-
-        loadWeather(
-          data.latitude,
-          data.longitude
-        );
-
-      }
-
-    } catch (error) {
-
-      cityElement.textContent =
-        "Неизвестно";
-
-      countryElement.textContent =
-        "Геолокация недоступна";
-
-
-      document
-        .getElementById(
-          "weather-description"
-        )
-        .textContent =
-        "Погода недоступна";
-
-    }
-
-  }
-
-
-  /* =====================================================
-     WEATHER
-  ===================================================== */
-
-  function weatherDescription(code) {
-
-    const values = {
-
-      0: ["☀️", "Ясно"],
-
-      1: ["🌤️", "Преимущественно ясно"],
-      2: ["⛅", "Переменная облачность"],
-      3: ["☁️", "Пасмурно"],
-
-      45: ["🌫️", "Туман"],
-      48: ["🌫️", "Изморозь"],
-
-      51: ["🌦️", "Морось"],
-      53: ["🌦️", "Морось"],
-      55: ["🌧️", "Сильная морось"],
-
-      61: ["🌧️", "Небольшой дождь"],
-      63: ["🌧️", "Дождь"],
-      65: ["🌧️", "Сильный дождь"],
-
-      71: ["🌨️", "Небольшой снег"],
-      73: ["❄️", "Снег"],
-      75: ["❄️", "Сильный снег"],
-
-      80: ["🌦️", "Ливень"],
-      81: ["🌧️", "Ливень"],
-      82: ["⛈️", "Сильный ливень"],
-
-      95: ["⛈️", "Гроза"],
-      96: ["⛈️", "Гроза с градом"],
-      99: ["⛈️", "Сильная гроза"]
-
-    };
-
-
-    return values[code]
-      || ["🌡️", "Неизвестно"];
-
-  }
-
-
-  async function loadWeather(
-    latitude,
-    longitude
-  ) {
-
-    try {
-
-      const url =
-        "https://api.open-meteo.com/v1/forecast" +
-        `?latitude=${encodeURIComponent(latitude)}` +
-        `&longitude=${encodeURIComponent(longitude)}` +
-        "&current=temperature_2m,weather_code" +
-        "&timezone=auto";
-
-
-      const response =
-        await fetch(url);
-
-
-      if (!response.ok) {
-        throw new Error(
-          "Weather unavailable"
-        );
-      }
-
-
-      const data =
-        await response.json();
-
-
-      const current =
-        data.current;
-
-
-      const [
-        icon,
-        description
-      ] =
-        weatherDescription(
-          current.weather_code
-        );
-
-
-      document
-        .getElementById(
-          "weather-icon"
-        )
-        .textContent =
-        icon;
-
-
-      document
-        .getElementById(
-          "temperature"
-        )
-        .textContent =
-        `${Math.round(
-          current.temperature_2m
-        )}°C`;
-
-
-      document
-        .getElementById(
-          "weather-description"
-        )
-        .textContent =
-        description;
-
-    } catch (error) {
-
-      document
-        .getElementById(
-          "weather-icon"
-        )
-        .textContent =
-        "·";
-
-
-      document
-        .getElementById(
-          "temperature"
-        )
-        .textContent =
-        "--";
-
-
-      document
-        .getElementById(
-          "weather-description"
-        )
-        .textContent =
-        "Погода недоступна";
-
-    }
-
-  }
-
-
-  /* =====================================================
-     INITIAL
-  ===================================================== */
 
   document
     .querySelectorAll(".category")
@@ -2141,9 +2146,6 @@
   render(
     currentSection
   );
-
-
-  loadLocation();
 
 </script>
 
