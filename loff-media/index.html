@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="theme-color" content="#2C4A2E">
+
+  <title>Лофф.Медиа</title>
+
+  <style>
+    :root {
+      --bg: #f3f3ef;
+      --surface: #ffffff;
+      --surface-2: #eceee9;
+
+      --text: #171a18;
+      --muted: #6f766f;
+
+      --primary: #2C4A2E;
+      --primary-hover: #3b613e;
+
+      --cream: #D9C8A4;
+
+      --border: rgba(44, 74, 46, .14);
+      --shadow: 0 8px 30px rgba(25, 35, 27, .07);
+
+      --radius: 16px;
+    }
+
+    body.dark {
+      --bg: #0c100d;
+      --surface: #141914;
+      --surface-2: #1c221d;
+
+      --text: #f1f3ef;
+      --muted: #aeb6ae;
+
+      --primary: #9fbe9f;
+      --primary-hover: #b5cfb5;
+
+      --cream: #D9C8A4;
+
+      --border: rgba(217, 200, 164, .13);
+      --shadow: 0 10px 35px rgba(0, 0, 0, .22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      -webkit-font-smoothing: antialiased;
+
+      transition:
+        background .25s ease,
+        color .25s ease;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    /* =========================================
+       APP
+    ========================================= */
+
+    .app {
+      width: min(1250px, 100%);
+      min-height: 100vh;
+
+      margin: auto;
+
+      padding: 12px;
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 10px;
+    }
+
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 17px 19px;
+
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 10px;
+
+      background: var(--primary);
+      color: var(--bg);
+
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 850;
+
+      letter-spacing: -.045em;
+    }
+
+    .brand-subtitle {
+      margin-top: 2px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 7px;
+    }
+
+    .icon-button {
+      width: 34px;
+      height: 34px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 10px;
+
+      background: var(--surface-2);
+      color: var(--text);
+
+      border: 1px solid var(--border);
+
+      cursor: pointer;
+
+      transition:
+        background .2s,
+        transform .2s;
+    }
+
+    .icon-button:hover {
+      background: var(--primary);
+      color: var(--bg);
+
+      transform: translateY(-1px);
+    }
+
+
+    /* =========================================
+       INFO
+    ========================================= */
+
+    .info-panel {
+      display: grid;
+
+      grid-template-columns: 1.5fr 1fr 1fr;
+
+      gap: 8px;
+    }
+
+    .info-card {
+      min-height: 76px;
+
+      padding: 14px 16px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow);
+    }
+
+    .info-label {
+      color: var(--muted);
+
+      font-size: 9px;
+      font-weight: 650;
+
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .info-value {
+      margin-top: 5px;
+
+      font-size: 16px;
+      font-weight: 800;
+
+      letter-spacing: -.04em;
+    }
+
+    .info-small {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+    .weather-value {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .weather-icon {
+      font-size: 22px;
+    }
+
+
+    /* =========================================
+       SEARCH
+    ========================================= */
+
+    .search-box {
+      display: flex;
+      align-items: stretch;
+
+      min-height: 52px;
+
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow);
+
+      overflow: hidden;
+    }
+
+    .search-engine {
+      position: relative;
+
+      width: 130px;
+
+      flex-shrink: 0;
+    }
+
+    .search-engine select {
+      width: 100%;
+      height: 100%;
+
+      appearance: none;
+
+      padding: 0 30px 0 15px;
+
+      border: 0;
+      outline: 0;
+
+      background: var(--surface-2);
+
+      color: var(--text);
+
+      font-size: 10px;
+      font-weight: 750;
+
+      cursor: pointer;
+    }
+
+    .search-engine::after {
+      content: "⌄";
+
+      position: absolute;
+
+      right: 11px;
+      top: 50%;
+
+      transform: translateY(-55%);
+
+      color: var(--muted);
+
+      pointer-events: none;
+    }
+
+    .search-input-wrap {
+      flex: 1;
+
+      display: flex;
+      align-items: center;
+    }
+
+    .search-symbol {
+      padding-left: 15px;
+
+      color: var(--muted);
+
+      font-size: 16px;
+    }
+
+    #web-search {
+      width: 100%;
+      height: 100%;
+
+      padding: 0 12px;
+
+      border: 0;
+      outline: 0;
+
+      background: transparent;
+
+      color: var(--text);
+
+      font-size: 12px;
+    }
+
+    #web-search::placeholder {
+      color: var(--muted);
+    }
+
+    .search-submit {
+      width: 48px;
+
+      margin: 6px;
+
+      border-radius: 10px;
+
+      background: var(--primary);
+      color: var(--bg);
+
+      cursor: pointer;
+
+      font-size: 16px;
+      font-weight: 800;
+
+      transition:
+        background .2s,
+        transform .2s;
+    }
+
+    .search-submit:hover {
+      background: var(--primary-hover);
+      transform: scale(.97);
+    }
+
+
+    /* =========================================
+       CATEGORY NAV
+    ========================================= */
+
+    .category-nav {
+      display: flex;
+      gap: 6px;
+
+      overflow-x: auto;
+
+      padding-bottom: 2px;
+
+      scrollbar-width: none;
+    }
+
+    .category-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category {
+      height: 35px;
+
+      flex-shrink: 0;
+
+      padding: 0 13px;
+
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      border-radius: 10px;
+
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+
+      color: var(--muted);
+
+      cursor: pointer;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      transition:
+        background .2s,
+        color .2s,
+        border-color .2s;
+    }
+
+    .category:hover {
+      color: var(--text);
+    }
+
+    .category.active {
+      background: var(--primary);
+      border-color: var(--primary);
+
+      color: var(--bg);
+    }
+
+    .category-icon {
+      font-size: 13px;
+    }
+
+
+    /* =========================================
+       CONTENT
+    ========================================= */
+
+    .content {
+      padding: 18px;
+
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      margin: 0;
+
+      font-size: 20px;
+      font-weight: 850;
+
+      letter-spacing: -.055em;
+    }
+
+    .section-description {
+      margin: 4px 0 0;
+
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+    .section-count {
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+
+    /* =========================================
+       CARDS
+    ========================================= */
+
+    .cards {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+      gap: 9px;
+    }
+
+    .service {
+      min-height: 164px;
+
+      padding: 14px;
+
+      display: flex;
+      flex-direction: column;
+
+      background: var(--surface-2);
+
+      border: 1px solid var(--border);
+      border-radius: 13px;
+
+      cursor: pointer;
+
+      animation: cardIn .28s ease both;
+
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-3px);
+
+      background: var(--surface);
+
+      border-color: var(--primary);
+
+      box-shadow:
+        0 8px 25px rgba(44, 74, 46, .08);
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(7px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .service-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .service-logo {
+      width: 48px;
+      height: 48px;
+
+      padding: 7px;
+
+      object-fit: contain;
+
+      border-radius: 11px;
+
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+    }
+
+    .service-logo-fallback {
+      width: 48px;
+      height: 48px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 11px;
+
+      background: var(--primary);
+
+      color: var(--bg);
+
+      font-size: 15px;
+      font-weight: 850;
+    }
+
+    .service-arrow {
+      width: 26px;
+      height: 26px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: var(--surface);
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      transition:
+        background .2s,
+        color .2s;
+    }
+
+    .service:hover .service-arrow {
+      background: var(--primary);
+      color: var(--bg);
+    }
+
+    .service-info {
+      margin-top: auto;
+      padding-top: 18px;
+    }
+
+    .service-name {
+      margin: 0;
+
+      font-size: 12px;
+      font-weight: 800;
+
+      letter-spacing: -.025em;
+    }
+
+    .service-description {
+      margin: 5px 0 0;
+
+      color: var(--muted);
+
+      font-size: 9px;
+
+      line-height: 1.5;
+    }
+
+
+    /* =========================================
+       EMPTY
+    ========================================= */
+
+    .empty {
+      padding: 50px 15px;
+
+      text-align: center;
+
+      color: var(--muted);
+    }
+
+    .empty-icon {
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .empty-title {
+      color: var(--text);
+
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .empty-text {
+      margin-top: 5px;
+
+      font-size: 10px;
+    }
+
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    .footer {
+      padding: 4px 4px 8px;
+
+      display: flex;
+      justify-content: space-between;
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+    .footer a {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 900px) {
+
+      .cards {
+        grid-template-columns:
+          repeat(3, minmax(0, 1fr));
+      }
+
+    }
+
+
+    @media (max-width: 680px) {
+
+      .app {
+        padding: 7px;
+        gap: 7px;
+      }
+
+      .info-panel {
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .info-card:first-child {
+        grid-column: span 2;
+      }
+
+      .cards {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .content {
+        padding: 13px;
+      }
+
+    }
+
+
+    @media (max-width: 480px) {
+
+      .header {
+        padding: 13px;
+      }
+
+      .brand-subtitle {
+        display: none;
+      }
+
+      .brand-title {
+        font-size: 14px;
+      }
+
+      .info-card {
+        min-height: 67px;
+        padding: 11px 12px;
+      }
+
+      .info-value {
+        font-size: 14px;
+      }
+
+      .weather-icon {
+        font-size: 18px;
+      }
+
+      .search-box {
+        min-height: 47px;
+      }
+
+      .search-engine {
+        width: 105px;
+      }
+
+      .search-engine select {
+        font-size: 9px;
+      }
+
+      .search-submit {
+        width: 42px;
+      }
+
+      .section-title {
+        font-size: 18px;
+      }
+
+      .service {
+        min-height: 151px;
+        padding: 11px;
+      }
+
+      .service-logo,
+      .service-logo-fallback {
+        width: 43px;
+        height: 43px;
+      }
+
+      .service-description {
+        font-size: 8px;
+      }
+
+      .footer {
+        display: none;
+      }
+
+    }
+
+
+    @media (max-width: 350px) {
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .service {
+        min-height: 125px;
+      }
+
+      .info-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .info-card:first-child {
+        grid-column: auto;
+      }
+
+    }
+  </style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+    <div class="brand">
+
+      <div class="brand-mark">
+        Л
+      </div>
+
+      <div>
+        <div class="brand-title">
+          Лофф.Медиа
+        </div>
+
+        <div class="brand-subtitle">
+          Музыка, видео, кино и интернет-сервисы
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <button
+        class="icon-button"
+        title="Borisloff.Dev"
+        onclick="window.open('https://borisloff.github.io', '_blank')">
+        ↗
+      </button>
+
+      <button
+        class="icon-button"
+        title="Сменить тему"
+        onclick="toggleTheme()">
+        ◐
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- INFO -->
+
+  <section class="info-panel">
+
+    <div class="info-card">
+
+      <div class="info-label">
+        Сегодня
+      </div>
+
+      <div
+        class="info-value"
+        id="date">
+        Загрузка...
+      </div>
+
+      <div
+        class="info-small"
+        id="time">
+        --:--
+      </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+      <div class="info-label">
+        Ваше местоположение
+      </div>
+
+      <div
+        class="info-value"
+        id="city">
+        Определяем...
+      </div>
+
+      <div
+        class="info-small"
+        id="country">
+        По IP
+      </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+      <div class="info-label">
+        Погода
+      </div>
+
+      <div class="weather-value">
+
+        <span
+          class="weather-icon"
+          id="weather-icon">
+          ·
+        </span>
+
+        <div>
+
+          <div
+            class="info-value"
+            id="temperature">
+            --
+          </div>
+
+          <div
+            class="info-small"
+            id="weather-description">
+            Загружаем...
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SEARCH -->
+
+  <form
+    class="search-box"
+    id="search-form">
+
+    <div class="search-engine">
+
+      <select id="search-engine">
+
+        <option value="yandex">
+          Яндекс
+        </option>
+
+        <option value="google">
+          Google
+        </option>
+
+        <option value="bing">
+          Bing
+        </option>
+
+        <option value="duckduckgo">
+          DuckDuckGo
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="search-input-wrap">
+
+      <span class="search-symbol">
+        ⌕
+      </span>
+
+      <input
+        id="web-search"
+        type="search"
+        placeholder="Поиск в интернете..."
+        autocomplete="off">
+
+    </div>
+
+
+    <button
+      class="search-submit"
+      type="submit">
+      →
+    </button>
+
+  </form>
+
+
+  <!-- CATEGORIES -->
+
+  <nav
+    class="category-nav"
+    id="category-nav">
+
+    <button class="category active" data-section="music">
+      <span class="category-icon">♪</span>
+      Музыка
+    </button>
+
+    <button class="category" data-section="radio">
+      <span class="category-icon">◉</span>
+      Радио
+    </button>
+
+    <button class="category" data-section="movies">
+      <span class="category-icon">▣</span>
+      Кино
+    </button>
+
+    <button class="category" data-section="video">
+      <span class="category-icon">▶</span>
+      Видео
+    </button>
+
+    <button class="category" data-section="images">
+      <span class="category-icon">▧</span>
+      Картинки
+    </button>
+
+    <button class="category" data-section="books">
+      <span class="category-icon">▤</span>
+      Книги
+    </button>
+
+    <button class="category" data-section="podcasts">
+      <span class="category-icon">◌</span>
+      Подкасты
+    </button>
+
+    <button class="category" data-section="games">
+      <span class="category-icon">⌘</span>
+      Игры
+    </button>
+
+    <button class="category" data-section="software">
+      <span class="category-icon">▱</span>
+      Софт
+    </button>
+
+  </nav>
+
+
+  <!-- CONTENT -->
+
+  <main class="content">
+
+    <div class="section-heading">
+
+      <div>
+
+        <h1
+          class="section-title"
+          id="section-title">
+          Музыка
+        </h1>
+
+        <p
+          class="section-description"
+          id="section-description">
+          Музыкальные сервисы и площадки
+        </p>
+
+      </div>
+
+
+      <span
+        class="section-count"
+        id="section-count">
+      </span>
+
+    </div>
+
+
+    <div
+      class="cards"
+      id="cards">
+    </div>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <span>
+      Лофф.Медиа · Borisloff.Dev
+    </span>
+
+    <a href="https://borisloff.github.io">
+      borisloff.github.io
+    </a>
+
+  </footer>
+
+</div>
+
+
+<script>
+
+  /* =====================================================
+     DATA
+  ===================================================== */
+
+  const sections = {
+
+    music: {
+      title: "Музыка",
+      description: "Музыкальные сервисы и площадки",
+
+      items: [
+
+        ["Яндекс Музыка", "https://music.yandex.ru", "https://music.yandex.ru/favicon.ico", "Музыка, рекомендации, плейлисты и подкасты."],
+
+        ["Звук", "https://zvuk.com", "https://zvuk.com/favicon.ico", "Музыка, подкасты и аудиокниги."],
+
+        ["VK Музыка", "https://vk.com/audio", "https://music.vk.com/favicon.ico", "Музыка и плейлисты ВКонтакте."],
+
+        ["Spotify", "https://open.spotify.com", "https://open.spotify.com/favicon.ico", "Музыка, альбомы и персональные рекомендации."],
+
+        ["Apple Music", "https://music.apple.com", "https://music.apple.com/favicon.ico", "Музыка и эксклюзивные релизы Apple."],
+
+        ["YouTube Music", "https://music.youtube.com", "https://music.youtube.com/favicon.ico", "Музыка и клипы от YouTube."],
+
+        ["SoundCloud", "https://soundcloud.com", "https://soundcloud.com/favicon.ico", "Музыка независимых исполнителей."],
+
+        ["Bandcamp", "https://bandcamp.com", "https://bandcamp.com/favicon.ico", "Музыка независимых артистов и лейблов."],
+
+        ["Last.fm", "https://www.last.fm", "https://www.last.fm/favicon.ico", "Статистика прослушиваний и музыкальные рекомендации."],
+
+        ["Zaycev.net", "https://zaycev.net", "https://zaycev.net/favicon.ico", "Музыка и чарты."],
+
+        ["Hitmo", "https://rus.hitmotop.com", "https://rus.hitmotop.com/favicon.ico", "Большой музыкальный каталог."],
+
+        ["Deezer", "https://www.deezer.com", "https://www.deezer.com/favicon.ico", "Музыка, миксы и персональные рекомендации."]
+
+      ]
+    },
+
+
+    radio: {
+      title: "Радио",
+      description: "Радиостанции и онлайн-эфиры",
+
+      items: [
+
+        ["Радио Record", "https://www.radiorecord.ru", "https://www.radiorecord.ru/favicon.ico", "EDM и танцевальная музыка."],
+
+        ["Европа Плюс", "https://europaplus.ru/live", "https://toplogos.ru/images/thumbs/preview-logo-europa-plus.png", "Поп-музыка и актуальные хиты."],
+
+        ["Ретро FM", "https://retrofm.ru", "https://retrofm.ru/favicon.ico", "Музыка 70-х, 80-х и 90-х."],
+
+        ["Авторадио", "https://www.avtoradio.ru", "https://www.avtoradio.ru/favicon.ico", "Музыка, новости и прямой эфир."],
+
+        ["Русское Радио", "https://rusradio.ru", "https://rusradio.ru/favicon.ico", "Российская поп-музыка."],
+
+        ["Наше Радио", "https://nashe.ru", "https://nashe.ru/favicon.ico", "Русский рок и альтернативная музыка."],
+
+        ["Maximum", "https://maximum.ru", "https://maximum.ru/favicon.ico", "Рок и современная музыка."],
+
+        ["Радио ENERGY", "https://radiovector.ru", "https://radiovector.ru/favicon.ico", "Популярная музыка и хиты."],
+
+        ["DFM", "https://dfm.ru", "https://dfm.ru/favicon.ico", "Танцевальная музыка."],
+
+        ["Радиопоток", "https://radiopotok.ru/russia", "https://radiopotok.ru/favicon.ico", "Каталог онлайн-радиостанций."],
+
+        ["TuneIn", "https://tunein.com", "https://tunein.com/favicon.ico", "Радиостанции со всего мира."],
+
+        ["Radio Garden", "https://radio.garden", "https://radio.garden/favicon.ico", "Радиостанции на интерактивной карте мира."]
+
+      ]
+    },
+
+
+    movies: {
+      title: "Кино",
+      description: "Онлайн-кинотеатры и каталоги",
+
+      items: [
+
+        ["Кинопоиск", "https://www.kinopoisk.ru", "https://www.kinopoisk.ru/favicon.ico", "Фильмы, сериалы, оценки и обзоры."],
+
+        ["Иви", "https://www.ivi.ru", "https://www.ivi.ru/favicon.ico", "Онлайн-кинотеатр с фильмами и сериалами."],
+
+        ["Okko", "https://okko.tv", "https://okko.tv/favicon.ico", "Фильмы, сериалы и спортивные трансляции."],
+
+        ["START", "https://start.ru", "https://start.ru/favicon.ico", "Российские сериалы и фильмы."],
+
+        ["Wink", "https://wink.ru", "https://wink.ru/favicon.ico", "Кино, сериалы и телеканалы."],
+
+        ["KION", "https://kion.ru", "https://kion.ru/favicon.ico", "Фильмы, сериалы и оригинальные проекты."],
+
+        ["PREMIER", "https://premier.one", "https://premier.one/favicon.ico", "Фильмы, сериалы и шоу."],
+
+        ["Apple TV", "https://tv.apple.com", "https://tv.apple.com/favicon.ico", "Фильмы и оригинальные сериалы Apple."],
+
+        ["IMDb", "https://www.imdb.com", "https://www.imdb.com/favicon.ico", "Мировая база фильмов, сериалов и актёров."],
+
+        ["Letterboxd", "https://letterboxd.com", "https://letterboxd.com/favicon.ico", "Дневник фильмов и социальная сеть киноманов."]
+
+      ]
+    },
+
+
+    video: {
+      title: "Видео",
+      description: "Видеохостинги и площадки",
+
+      items: [
+
+        ["YouTube", "https://www.youtube.com", "https://www.youtube.com/favicon.ico", "Крупнейшая видеоплатформа."],
+
+        ["VK Видео", "https://vkvideo.ru", "https://vkvideo.ru/favicon.ico", "Видео, шоу и авторский контент."],
+
+        ["RuTube", "https://rutube.ru", "https://rutube.ru/favicon.ico", "Российская видеоплатформа."],
+
+        ["Дзен", "https://dzen.ru/video", "https://dzen.ru/favicon.ico", "Видео от блогеров и авторов."],
+
+        ["Twitch", "https://www.twitch.tv", "https://www.twitch.tv/favicon.ico", "Прямые трансляции и игровые стримы."],
+
+        ["Vimeo", "https://vimeo.com", "https://vimeo.com/favicon.ico", "Профессиональное видео."],
+
+        ["Dailymotion", "https://www.dailymotion.com", "https://www.dailymotion.com/favicon.ico", "Видео и новости."],
+
+        ["VK Клипы", "https://vkvideo.ru/clips", "https://vkvideo.ru/favicon.ico", "Короткие вертикальные ролики."]
+
+      ]
+    },
+
+
+    images: {
+      title: "Картинки",
+      description: "Поиск изображений и визуальные платформы",
+
+      items: [
+
+        ["Яндекс Картинки", "https://yandex.ru/images", "https://yandex.ru/favicon.ico", "Поиск изображений Яндекса."],
+
+        ["Google Картинки", "https://images.google.com", "https://www.google.com/favicon.ico", "Поиск изображений Google."],
+
+        ["Pinterest", "https://www.pinterest.com", "https://www.pinterest.com/favicon.ico", "Идеи, подборки и вдохновение."],
+
+        ["Unsplash", "https://unsplash.com", "https://unsplash.com/favicon.ico", "Бесплатные фотографии."],
+
+        ["Pexels", "https://www.pexels.com", "https://www.pexels.com/favicon.ico", "Фото и видео."],
+
+        ["Pixabay", "https://pixabay.com", "https://pixabay.com/favicon.ico", "Бесплатные изображения и видео."],
+
+        ["ArtStation", "https://www.artstation.com", "https://www.artstation.com/favicon.ico", "Работы художников и 3D-артистов."],
+
+        ["Behance", "https://www.behance.net", "https://www.behance.net/favicon.ico", "Портфолио дизайнеров и творческих студий."]
+
+      ]
+    },
+
+
+    books: {
+      title: "Книги",
+      description: "Книги, библиотеки и электронное чтение",
+
+      items: [
+
+        ["ЛитРес", "https://www.litres.ru", "https://www.litres.ru/favicon.ico", "Электронные и аудиокниги."],
+
+        ["MyBook", "https://mybook.ru", "https://mybook.ru/favicon.ico", "Электронная библиотека."],
+
+        ["Google Books", "https://books.google.com", "https://books.google.com/favicon.ico", "Поиск книг и публикаций."],
+
+        ["Project Gutenberg", "https://www.gutenberg.org", "https://www.gutenberg.org/favicon.ico", "Бесплатная библиотека классики."],
+
+        ["Internet Archive", "https://archive.org", "https://archive.org/favicon.ico", "Цифровая библиотека интернета."],
+
+        ["Author.Today", "https://author.today", "https://author.today/favicon.ico", "Книги современных авторов."]
+
+      ]
+    },
+
+
+    podcasts: {
+      title: "Подкасты",
+      description: "Подкасты, шоу и аудиопрограммы",
+
+      items: [
+
+        ["Яндекс Музыка", "https://music.yandex.ru", "https://music.yandex.ru/favicon.ico", "Подкасты и аудиошоу."],
+
+        ["Звук", "https://zvuk.com", "https://zvuk.com/favicon.ico", "Подкасты и аудиоконтент."],
+
+        ["Spotify", "https://open.spotify.com", "https://open.spotify.com/favicon.ico", "Подкасты и музыка."],
+
+        ["Apple Podcasts", "https://podcasts.apple.com", "https://podcasts.apple.com/favicon.ico", "Подкасты Apple."],
+
+        ["Castbox", "https://castbox.fm", "https://castbox.fm/favicon.ico", "Каталог подкастов."],
+
+        ["SoundCloud", "https://soundcloud.com", "https://soundcloud.com/favicon.ico", "Аудиошоу и независимые авторы."]
+
+      ]
+    },
+
+
+    games: {
+      title: "Игры",
+      description: "Игровые магазины и сервисы",
+
+      items: [
+
+        ["Steam", "https://store.steampowered.com", "https://store.steampowered.com/favicon.ico", "Игры, магазин и игровое сообщество."],
+
+        ["Epic Games", "https://store.epicgames.com", "https://store.epicgames.com/favicon.ico", "Игровой магазин Epic Games."],
+
+        ["GOG", "https://www.gog.com", "https://www.gog.com/favicon.ico", "Игры без DRM."],
+
+        ["Xbox", "https://www.xbox.com", "https://www.xbox.com/favicon.ico", "Игры и сервисы Xbox."],
+
+        ["PlayStation", "https://www.playstation.com", "https://www.playstation.com/favicon.ico", "Игры и сервисы PlayStation."],
+
+        ["Nintendo", "https://www.nintendo.com", "https://www.nintendo.com/favicon.ico", "Игры и продукты Nintendo."],
+
+        ["itch.io", "https://itch.io", "https://itch.io/favicon.ico", "Инди-игры и разработчики."],
+
+        ["HowLongToBeat", "https://howlongtobeat.com", "https://howlongtobeat.com/favicon.ico", "Сколько времени займёт прохождение игры."]
+
+      ]
+    },
+
+
+    software: {
+      title: "Софт",
+      description: "Программы, инструменты и сервисы для работы",
+
+      items: [
+
+        ["GitHub", "https://github.com", "https://github.com/favicon.ico", "Код, репозитории и проекты."],
+
+        ["GitLab", "https://gitlab.com", "https://gitlab.com/favicon.ico", "DevOps и репозитории."],
+
+        ["Figma", "https://www.figma.com", "https://www.figma.com/favicon.ico", "Дизайн интерфейсов."],
+
+        ["Canva", "https://www.canva.com", "https://www.canva.com/favicon.ico", "Онлайн-дизайн и графика."],
+
+        ["Google Docs", "https://docs.google.com", "https://docs.google.com/favicon.ico", "Онлайн-документы."],
+
+        ["Google Drive", "https://drive.google.com", "https://drive.google.com/favicon.ico", "Облачное хранилище."],
+
+        ["Notion", "https://www.notion.so", "https://www.notion.so/favicon.ico", "Заметки, документы и базы данных."],
+
+        ["CodePen", "https://codepen.io", "https://codepen.io/favicon.ico", "Песочница для веб-разработки."],
+
+        ["JSFiddle", "https://jsfiddle.net", "https://jsfiddle.net/favicon.ico", "Онлайн-редактор HTML, CSS и JS."],
+
+        ["Stack Overflow", "https://stackoverflow.com", "https://stackoverflow.com/favicon.ico", "Вопросы и ответы для разработчиков."],
+
+        ["Python", "https://www.python.org", "https://www.python.org/favicon.ico", "Официальный сайт Python."],
+
+        ["MDN Web Docs", "https://developer.mozilla.org", "https://developer.mozilla.org/favicon.ico", "Документация по веб-технологиям."]
+
+      ]
+    }
+
+  };
+
+
+  /* =====================================================
+     ELEMENTS
+  ===================================================== */
+
+  const cards =
+    document.getElementById("cards");
+
+  const sectionTitle =
+    document.getElementById("section-title");
+
+  const sectionDescription =
+    document.getElementById("section-description");
+
+  const sectionCount =
+    document.getElementById("section-count");
+
+
+  /* =====================================================
+     STATE
+  ===================================================== */
+
+  let currentSection =
+    localStorage.getItem("loffMediaSection")
+    || "music";
+
+
+  let currentQuery = "";
+
+
+  /* =====================================================
+     RENDER
+  ===================================================== */
+
+  function render(section, query = "") {
+
+    currentSection = section;
+    currentQuery = query;
+
+    localStorage.setItem(
+      "loffMediaSection",
+      section
+    );
+
+
+    const data =
+      sections[section];
+
+
+    sectionTitle.textContent =
+      data.title;
+
+    sectionDescription.textContent =
+      data.description;
+
+
+    const normalizedQuery =
+      query.trim().toLowerCase();
+
+
+    const filtered =
+      data.items.filter(item => {
+
+        const name =
+          item[0].toLowerCase();
+
+        const description =
+          item[3].toLowerCase();
+
+        return (
+          name.includes(normalizedQuery) ||
+          description.includes(normalizedQuery)
+        );
+
+      });
+
+
+    sectionCount.textContent =
+      query
+        ? `${filtered.length} из ${data.items.length}`
+        : `${data.items.length} сервисов`;
+
+
+    cards.innerHTML = "";
+
+
+    if (!filtered.length) {
+
+      cards.innerHTML = `
+
+        <div class="empty">
+
+          <div class="empty-icon">
+            ⌕
+          </div>
+
+          <div class="empty-title">
+            Ничего не найдено
+          </div>
+
+          <div class="empty-text">
+            Попробуй изменить поисковый запрос.
+          </div>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    filtered.forEach(
+      (item, index) => {
+
+        const [
+          name,
+          url,
+          logo,
+          description
+        ] = item;
+
+
+        const card =
+          document.createElement("article");
+
+
+        card.className =
+          "service";
+
+
+        card.style.animationDelay =
+          `${index * 25}ms`;
+
+
+        const logoElement =
+          document.createElement("img");
+
+
+        logoElement.className =
+          "service-logo";
+
+
+        logoElement.src =
+          logo;
+
+        logoElement.alt =
+          name;
+
+        logoElement.loading =
+          "lazy";
+
+
+        logoElement.onerror =
+          function () {
+
+            const fallback =
+              document.createElement("div");
+
+            fallback.className =
+              "service-logo-fallback";
+
+            fallback.textContent =
+              name.charAt(0).toUpperCase();
+
+
+            this.replaceWith(
+              fallback
+            );
+
+          };
+
+
+        card.innerHTML = `
+
+          <div class="service-top">
+
+            <div class="logo-placeholder"></div>
+
+            <span class="service-arrow">
+              ↗
+            </span>
+
+          </div>
+
+
+          <div class="service-info">
+
+            <h2 class="service-name">
+              ${escapeHTML(name)}
+            </h2>
+
+            <p class="service-description">
+              ${escapeHTML(description)}
+            </p>
+
+          </div>
+
+        `;
+
+
+        card
+          .querySelector(".logo-placeholder")
+          .replaceWith(logoElement);
+
+
+        card.addEventListener(
+          "click",
+          () => {
+
+            window.open(
+              url,
+              "_blank",
+              "noopener,noreferrer"
+            );
+
+          }
+        );
+
+
+        cards.appendChild(card);
+
+      }
+    );
+
+  }
+
+
+  /* =====================================================
+     ESCAPE HTML
+  ===================================================== */
+
+  function escapeHTML(value) {
+
+    return value
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+  }
+
+
+  /* =====================================================
+     CATEGORY
+  ===================================================== */
+
+  document
+    .querySelectorAll(".category")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          document
+            .querySelectorAll(".category")
+            .forEach(item =>
+              item.classList.remove(
+                "active"
+              )
+            );
+
+
+          button.classList.add(
+            "active"
+          );
+
+
+          currentSection =
+            button.dataset.section;
+
+
+          render(
+            currentSection,
+            currentQuery
+          );
+
+        }
+      );
+
+    });
+
+
+  /* =====================================================
+     LOCAL SEARCH
+  ===================================================== */
+
+  const localSearch =
+    document.createElement("input");
+
+  /*
+    Не добавляем отдельное поле:
+    используем Ctrl+K для поиска
+    внутри выбранного раздела.
+  */
+
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        (event.ctrlKey || event.metaKey) &&
+        event.key.toLowerCase() === "k"
+      ) {
+
+        event.preventDefault();
+
+        document
+          .getElementById("web-search")
+          .focus();
+
+      }
+
+    }
+  );
+
+
+  /*
+    Поиск сверху — веб-поиск.
+    Поэтому фильтр каталога оставляем
+    через /?section=music&search=...
+    при необходимости можно расширить.
+  */
+
+
+  /* =====================================================
+     WEB SEARCH
+  ===================================================== */
+
+  const searchForm =
+    document.getElementById(
+      "search-form"
+    );
+
+
+  const webSearch =
+    document.getElementById(
+      "web-search"
+    );
+
+
+  const searchEngine =
+    document.getElementById(
+      "search-engine"
+    );
+
+
+  searchEngine.value =
+    localStorage.getItem(
+      "loffSearchEngine"
+    ) || "yandex";
+
+
+  searchEngine.addEventListener(
+    "change",
+    () => {
+
+      localStorage.setItem(
+        "loffSearchEngine",
+        searchEngine.value
+      );
+
+    }
+  );
+
+
+  const engines = {
+
+    yandex:
+      "https://yandex.ru/search/?text=",
+
+    google:
+      "https://www.google.com/search?q=",
+
+    bing:
+      "https://www.bing.com/search?q=",
+
+    duckduckgo:
+      "https://duckduckgo.com/?q="
+
+  };
+
+
+  searchForm.addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+
+      const query =
+        webSearch.value.trim();
+
+
+      if (!query) return;
+
+
+      const url =
+        engines[
+          searchEngine.value
+        ] +
+        encodeURIComponent(query);
+
+
+      window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+    }
+  );
+
+
+  /* =====================================================
+     THEME
+  ===================================================== */
+
+  if (
+    localStorage.getItem(
+      "loffTheme"
+    ) === "dark"
+  ) {
+
+    document.body.classList.add(
+      "dark"
+    );
+
+  }
+
+
+  function toggleTheme() {
+
+    const dark =
+      document.body.classList.toggle(
+        "dark"
+      );
+
+
+    localStorage.setItem(
+      "loffTheme",
+      dark
+        ? "dark"
+        : "light"
+    );
+
+  }
+
+
+  /* =====================================================
+     DATE / TIME
+  ===================================================== */
+
+  function updateDateTime() {
+
+    const now =
+      new Date();
+
+
+    const date =
+      now.toLocaleDateString(
+        "ru-RU",
+        {
+          weekday: "long",
+          day: "numeric",
+          month: "long"
+        }
+      );
+
+
+    document
+      .getElementById("date")
+      .textContent =
+      date.charAt(0).toUpperCase() +
+      date.slice(1);
+
+
+    document
+      .getElementById("time")
+      .textContent =
+      now.toLocaleTimeString(
+        "ru-RU",
+        {
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      );
+
+  }
+
+
+  updateDateTime();
+
+  setInterval(
+    updateDateTime,
+    1000
+  );
+
+
+  /* =====================================================
+     IP LOCATION
+  ===================================================== */
+
+  async function loadLocation() {
+
+    const cityElement =
+      document.getElementById("city");
+
+    const countryElement =
+      document.getElementById("country");
+
+
+    try {
+
+      const response =
+        await fetch(
+          "https://ipapi.co/json/"
+        );
+
+
+      if (!response.ok) {
+        throw new Error(
+          "Location unavailable"
+        );
+      }
+
+
+      const data =
+        await response.json();
+
+
+      const city =
+        data.city || "Неизвестно";
+
+
+      cityElement.textContent =
+        city;
+
+
+      countryElement.textContent =
+        data.country_name
+          ? data.country_name
+          : "По IP";
+
+
+      if (
+        data.latitude &&
+        data.longitude
+      ) {
+
+        loadWeather(
+          data.latitude,
+          data.longitude
+        );
+
+      }
+
+    } catch (error) {
+
+      cityElement.textContent =
+        "Неизвестно";
+
+      countryElement.textContent =
+        "Геолокация недоступна";
+
+
+      document
+        .getElementById(
+          "weather-description"
+        )
+        .textContent =
+        "Погода недоступна";
+
+    }
+
+  }
+
+
+  /* =====================================================
+     WEATHER
+  ===================================================== */
+
+  function weatherDescription(code) {
+
+    const values = {
+
+      0: ["☀️", "Ясно"],
+
+      1: ["🌤️", "Преимущественно ясно"],
+      2: ["⛅", "Переменная облачность"],
+      3: ["☁️", "Пасмурно"],
+
+      45: ["🌫️", "Туман"],
+      48: ["🌫️", "Изморозь"],
+
+      51: ["🌦️", "Морось"],
+      53: ["🌦️", "Морось"],
+      55: ["🌧️", "Сильная морось"],
+
+      61: ["🌧️", "Небольшой дождь"],
+      63: ["🌧️", "Дождь"],
+      65: ["🌧️", "Сильный дождь"],
+
+      71: ["🌨️", "Небольшой снег"],
+      73: ["❄️", "Снег"],
+      75: ["❄️", "Сильный снег"],
+
+      80: ["🌦️", "Ливень"],
+      81: ["🌧️", "Ливень"],
+      82: ["⛈️", "Сильный ливень"],
+
+      95: ["⛈️", "Гроза"],
+      96: ["⛈️", "Гроза с градом"],
+      99: ["⛈️", "Сильная гроза"]
+
+    };
+
+
+    return values[code]
+      || ["🌡️", "Неизвестно"];
+
+  }
+
+
+  async function loadWeather(
+    latitude,
+    longitude
+  ) {
+
+    try {
+
+      const url =
+        "https://api.open-meteo.com/v1/forecast" +
+        `?latitude=${encodeURIComponent(latitude)}` +
+        `&longitude=${encodeURIComponent(longitude)}` +
+        "&current=temperature_2m,weather_code" +
+        "&timezone=auto";
+
+
+      const response =
+        await fetch(url);
+
+
+      if (!response.ok) {
+        throw new Error(
+          "Weather unavailable"
+        );
+      }
+
+
+      const data =
+        await response.json();
+
+
+      const current =
+        data.current;
+
+
+      const [
+        icon,
+        description
+      ] =
+        weatherDescription(
+          current.weather_code
+        );
+
+
+      document
+        .getElementById(
+          "weather-icon"
+        )
+        .textContent =
+        icon;
+
+
+      document
+        .getElementById(
+          "temperature"
+        )
+        .textContent =
+        `${Math.round(
+          current.temperature_2m
+        )}°C`;
+
+
+      document
+        .getElementById(
+          "weather-description"
+        )
+        .textContent =
+        description;
+
+    } catch (error) {
+
+      document
+        .getElementById(
+          "weather-icon"
+        )
+        .textContent =
+        "·";
+
+
+      document
+        .getElementById(
+          "temperature"
+        )
+        .textContent =
+        "--";
+
+
+      document
+        .getElementById(
+          "weather-description"
+        )
+        .textContent =
+        "Погода недоступна";
+
+    }
+
+  }
+
+
+  /* =====================================================
+     INITIAL
+  ===================================================== */
+
+  document
+    .querySelectorAll(".category")
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.section ===
+          currentSection
+      );
+
+    });
+
+
+  render(
+    currentSection
+  );
+
+
+  loadLocation();
+
+</script>
+
+</body>
+</html>
