@@ -1,173 +1,1559 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="yandex-verification" content="700f69b849a81e2c" />
-  <link rel="icon" href="https://borisloff.github.io/favicon.png" type="image/x-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+
+  <meta name="yandex-verification" content="700f69b849a81e2c">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <link
+    rel="icon"
+    href="https://borisloff.github.io/favicon.png"
+    type="image/x-icon"
+  >
+
   <title>Borisloff.Dev</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f5f5f5;
-      color: #1f2937;
-      transition: background 0.5s, color 0.5s;
+    :root {
+      --green: #2C4A2E;
+      --green-hover: #385f3b;
+      --cream: #D9C8A4;
+
+      --bg: #f5f5f2;
+      --surface: #ffffff;
+      --surface-2: #f0f1ed;
+
+      --text: #1d211e;
+      --muted: #6d746d;
+
+      --border: rgba(44, 74, 46, .13);
+
+      --shadow:
+        0 8px 30px rgba(28, 40, 29, .055);
     }
+
     body.dark {
-      background: #0f1115;
-      color: #d1d5db;
+      --green: #9bc39f;
+      --green-hover: #b1d4b4;
+
+      --bg: #0c100d;
+      --surface: #151a16;
+      --surface-2: #1c211d;
+
+      --text: #f2f4ef;
+      --muted: #b6beb6;
+
+      --border: rgba(217, 200, 164, .18);
+
+      --shadow:
+        0 12px 40px rgba(0, 0, 0, .28);
     }
-    header {
-      background: rgba(34,197,94,0.8);
-      color: white;
-      transition: background 0.4s;
+
+    * {
+      box-sizing: border-box;
     }
-    .card {
-      backdrop-filter: blur(6px);
-      background: rgba(34,197,94,0.12);
-      border: 1px solid rgba(34,197,94,0.25);
-      border-radius: 1rem;
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      -webkit-font-smoothing: antialiased;
+
+      transition:
+        background .3s ease,
+        color .3s ease;
+    }
+
+    body.dark {
+      background:
+        radial-gradient(
+          circle at 80% 0%,
+          rgba(155, 195, 159, .07),
+          transparent 32%
+        ),
+        var(--bg);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .header {
+      width: min(1080px, calc(100% - 32px));
+      margin: 16px auto 0;
+
+      position: sticky;
+      top: 12px;
+      z-index: 10;
+
       display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      padding: 1rem;
-      transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-    }
-    body.dark .card {
-      background: rgba(20,20,20,0.8);
-      border: 1px solid rgba(34,197,94,0.3);
-    }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-      background: rgba(34,197,94,0.18);
-    }
-    .card-content {
-      display: flex;
-      gap: 1rem;
       align-items: center;
+      justify-content: space-between;
+
+      padding: 12px 14px;
+
+      background:
+        color-mix(
+          in srgb,
+          var(--surface) 90%,
+          transparent
+        );
+
+      border: 1px solid var(--border);
+      border-radius: 13px;
+
+      backdrop-filter: blur(16px);
+
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -.035em;
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 12px;
+      transition: color .2s;
+    }
+
+    .nav a:hover {
+      color: var(--green);
+    }
+
+    .theme {
+      width: 32px;
+      height: 32px;
+
+      display: grid;
+      place-items: center;
+
+      padding: 0;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      background: transparent;
+      color: var(--text);
+
+      cursor: pointer;
+
+      transition:
+        background .2s,
+        color .2s;
+    }
+
+    .theme:hover {
+      background: var(--green);
+      color: var(--bg);
+    }
+
+
+    /* =========================
+       LAYOUT
+    ========================= */
+
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 600px;
+
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      align-items: center;
+
+      gap: 70px;
+
+      padding: 95px 0 85px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      margin-bottom: 18px;
+
+      color: var(--green);
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .hero h1 {
+      max-width: 800px;
+
+      margin: 0;
+
+      font-size: clamp(50px, 7vw, 82px);
+      line-height: .92;
+
+      letter-spacing: -.075em;
+    }
+
+    .hero h1 span {
+      color: var(--green);
+    }
+
+    .hero-description {
+      max-width: 570px;
+
+      margin: 24px 0 0;
+
+      color: var(--muted);
+
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .hero-links {
+      display: flex;
       flex-wrap: wrap;
+      gap: 8px;
+
+      margin-top: 25px;
     }
-    .card-content img {
-      width: 80px;
-      height: 80px;
-      border-radius: 1rem;
+
+    .button {
+      min-height: 39px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 9px 14px;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      background: var(--surface);
+
+      color: var(--text);
+
+      font-size: 12px;
+      font-weight: 650;
+
+      transition:
+        transform .2s,
+        background .2s,
+        border-color .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button.primary {
+      background: var(--green);
+      border-color: var(--green);
+
+      color: #fff;
+    }
+
+    body.dark .button.primary {
+      color: #111610;
+    }
+
+    .button.primary:hover {
+      background: var(--green-hover);
+      border-color: var(--green-hover);
+    }
+
+
+    /* =========================
+       PROFILE CARD
+    ========================= */
+
+    .profile {
+      padding: 17px;
+
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+      border-radius: 17px;
+
+      box-shadow: var(--shadow);
+
+      transform: rotate(1.5deg);
+
+      transition: transform .25s;
+    }
+
+    .profile:hover {
+      transform: rotate(0);
+    }
+
+    .profile img {
+      width: 100%;
+      aspect-ratio: 1;
+
       object-fit: cover;
-      flex-shrink: 0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+      border-radius: 13px;
     }
-    .card-text {
+
+    .profile-info {
+      padding: 14px 2px 2px;
+    }
+
+    .profile-name {
+      font-size: 16px;
+      font-weight: 750;
+    }
+
+    .profile-role {
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+    .profile-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      margin-top: 12px;
+
+      color: var(--green);
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #65a36b;
+    }
+
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    section {
+      padding: 65px 0;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .section-number {
+      margin-bottom: 7px;
+
+      color: var(--green);
+
+      font-size: 10px;
+      font-weight: 750;
+
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 0 0 27px;
+
+      font-size: 32px;
+      line-height: 1;
+
+      letter-spacing: -.055em;
+    }
+
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      gap: 12px;
+    }
+
+    .about-card {
+      padding: 23px;
+
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+      border-radius: 14px;
+
+      box-shadow: var(--shadow);
+    }
+
+    .about-card p {
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+
+      margin-top: 18px;
+    }
+
+    .tag {
+      padding: 5px 8px;
+
+      border: 1px solid var(--border);
+      border-radius: 6px;
+
+      background: var(--surface-2);
+
+      color: var(--muted);
+
+      font-size: 10px;
+      font-weight: 650;
+    }
+
+
+    /* =========================
+       PROJECTS
+    ========================= */
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      gap: 12px;
+    }
+
+    .project {
+      min-height: 235px;
+
       display: flex;
       flex-direction: column;
-      flex: 1;
-      min-width: 0;
+
+      padding: 20px;
+
+      position: relative;
+      overflow: hidden;
+
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+      border-radius: 15px;
+
+      box-shadow: var(--shadow);
+
+      transition:
+        transform .25s,
+        border-color .25s,
+        box-shadow .25s;
     }
-    .btn-green {
-      background: rgba(34,197,94,0.6);
-      color: #fff;
-      transition: background 0.3s ease, transform 0.3s ease;
-      width: 100%;
-      padding: 0.5rem;
-      font-weight: 600;
-      border-radius: 0.75rem;
-      text-align: center;
+
+    .project:hover {
+      transform: translateY(-4px);
+
+      border-color:
+        color-mix(
+          in srgb,
+          var(--green) 35%,
+          var(--border)
+        );
+
+      box-shadow:
+        0 15px 40px rgba(30, 45, 30, .10);
     }
-    .btn-green:hover {
-      background: rgba(34,197,94,0.8);
-      transform: scale(1.03);
+
+    .project.featured {
+      grid-column: span 2;
+
+      min-height: 275px;
+
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(44, 74, 46, .10),
+          transparent 40%
+        ),
+        var(--surface);
     }
-    .btn-socials {
+
+    body.dark .project.featured {
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(155, 195, 159, .09),
+          transparent 40%
+        ),
+        var(--surface);
+    }
+
+    .project-top {
       display: flex;
-      gap: 0.5rem;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      gap: 12px;
     }
-    .btn-socials .btn-green {
-      flex: 1;
-      padding: 0.5rem;
-      font-size: 0.9rem;
+
+    .project-logo {
+      width: 58px;
+      height: 58px;
+
+      object-fit: cover;
+
+      border-radius: 13px;
+
+      box-shadow:
+        0 5px 16px rgba(0, 0, 0, .08);
     }
-    @media (max-width: 640px) {
-      .card-content img {
+
+    .arrow {
+      width: 32px;
+      height: 32px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: var(--surface-2);
+
+      color: var(--green);
+
+      transition:
+        background .2s,
+        color .2s,
+        transform .2s;
+    }
+
+    .project:hover .arrow {
+      background: var(--green);
+      color: var(--bg);
+
+      transform: translate(2px, -2px);
+    }
+
+    .project-info {
+      margin-top: auto;
+      padding-top: 25px;
+
+      max-width: 680px;
+    }
+
+    .project h3 {
+      margin: 0 0 7px;
+
+      font-size: 20px;
+      line-height: 1.1;
+
+      letter-spacing: -.035em;
+    }
+
+    .featured h3 {
+      font-size: 25px;
+    }
+
+    .project p {
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .project-type {
+      display: block;
+
+      margin-top: 14px;
+
+      color: var(--green);
+
+      font-size: 9px;
+      font-weight: 750;
+
+      letter-spacing: .1em;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+
+      margin-top: 15px;
+    }
+
+    .feature {
+      padding: 5px 7px;
+
+      border-radius: 5px;
+
+      background:
+        color-mix(
+          in srgb,
+          var(--green) 8%,
+          transparent
+        );
+
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+
+    /* =========================
+       CURRENT
+    ========================= */
+
+    .current {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      padding: 21px;
+
+      background:
+        linear-gradient(
+          110deg,
+          color-mix(
+            in srgb,
+            var(--green) 8%,
+            var(--surface)
+          ),
+          var(--surface)
+        );
+
+      border: 1px solid var(--border);
+      border-radius: 14px;
+
+      box-shadow: var(--shadow);
+    }
+
+    .current-icon {
+      width: 44px;
+      height: 44px;
+
+      flex-shrink: 0;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 11px;
+
+      background: var(--cream);
+      color: var(--green);
+
+      font-size: 18px;
+    }
+
+    .current strong {
+      display: block;
+
+      margin-bottom: 4px;
+
+      font-size: 13px;
+    }
+
+    .current span {
+      color: var(--muted);
+
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      width: min(1080px, calc(100% - 32px));
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 30px 0 40px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+    footer strong {
+      color: var(--green);
+    }
+
+
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr) 210px;
+        gap: 35px;
+      }
+
+      .hero h1 {
+        font-size: 58px;
+      }
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 680px) {
+      .header {
+        width: calc(100% - 20px);
+
+        margin-top: 9px;
+        top: 7px;
+
+        padding: 10px 11px;
+      }
+
+      main {
+        width: calc(100% - 20px);
+      }
+
+      .nav {
+        gap: 7px;
+      }
+
+      .nav a {
+        display: none;
+      }
+
+      .theme {
+        width: 31px;
+        height: 31px;
+      }
+
+
+      /* HERO */
+
+      .hero {
+        min-height: auto;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 30px;
+
+        padding: 75px 0 52px;
+      }
+
+      .eyebrow {
+        margin-bottom: 14px;
+      }
+
+      .hero h1 {
+        font-size: clamp(43px, 14vw, 57px);
+        line-height: .94;
+
+        letter-spacing: -.07em;
+      }
+
+      .hero-description {
+        margin-top: 19px;
+
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .hero-links {
+        gap: 6px;
+        margin-top: 21px;
+      }
+
+      .button {
+        min-height: 38px;
+
+        padding: 8px 11px;
+
+        font-size: 11px;
+      }
+
+
+      /* PROFILE */
+
+      .profile {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns: 60px minmax(0, 1fr);
+
+        gap: 13px;
+
+        padding: 14px;
+
+        transform: none;
+      }
+
+      .profile:hover {
+        transform: none;
+      }
+
+      .profile img {
         width: 60px;
         height: 60px;
+
+        grid-row: span 2;
+      }
+
+      .profile-info {
+        padding: 2px 0;
+      }
+
+      .profile-status {
+        margin-top: 7px;
+      }
+
+
+      /* SECTIONS */
+
+      section {
+        padding: 52px 0;
+      }
+
+      .section-title {
+        margin-bottom: 21px;
+
+        font-size: 28px;
+      }
+
+
+      /* ABOUT */
+
+      .about {
+        grid-template-columns: 1fr;
+        gap: 9px;
+      }
+
+      .about-card {
+        padding: 19px;
+      }
+
+      .about-card p {
+        font-size: 12px;
+      }
+
+
+      /* PROJECTS */
+
+      .projects {
+        grid-template-columns: 1fr;
+        gap: 9px;
+      }
+
+      .project,
+      .project.featured {
+        grid-column: auto;
+
+        min-height: 215px;
+
+        padding: 18px;
+      }
+
+      .project.featured {
+        min-height: 270px;
+      }
+
+      .project-logo {
+        width: 54px;
+        height: 54px;
+      }
+
+      .project-info {
+        padding-top: 22px;
+      }
+
+      .project h3,
+      .featured h3 {
+        font-size: 19px;
+      }
+
+      .project p {
+        font-size: 11px;
+      }
+
+      .feature {
+        font-size: 8px;
+      }
+
+
+      /* CURRENT */
+
+      .current {
+        padding: 17px;
+
+        align-items: flex-start;
+
+        gap: 11px;
+      }
+
+      .current-icon {
+        width: 40px;
+        height: 40px;
+
+        font-size: 16px;
+      }
+
+      .current strong {
+        font-size: 12px;
+      }
+
+      .current span {
+        font-size: 11px;
+      }
+
+
+      /* FOOTER */
+
+      footer {
+        width: calc(100% - 20px);
+
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 6px;
+
+        padding:
+          25px 0 32px;
+      }
+    }
+
+
+    /* =========================
+       VERY SMALL PHONES
+    ========================= */
+
+    @media (max-width: 380px) {
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero-links {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-links .primary {
+        grid-column: 1 / -1;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .features {
+        gap: 4px;
+      }
+    }
+
+
+    /* =========================
+       REDUCED MOTION
+    ========================= */
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
       }
     }
   </style>
 </head>
-<body class="p-4">
 
-  <!-- Header -->
-  <header class="rounded-xl flex flex-col items-center p-6 mb-6 shadow-md">
-    <h1 class="text-4xl font-bold">Borisloff.Dev</h1>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+    <a href="#" class="brand">
+      <span class="brand-dot"></span>
+      Borisloff.Dev
+    </a>
+
+    <nav class="nav">
+
+      <a href="#about">
+        Обо мне
+      </a>
+
+      <a href="#projects">
+        Проекты
+      </a>
+
+      <a href="#current">
+        Сейчас
+      </a>
+
+      <button
+        class="theme"
+        onclick="toggleTheme()"
+        aria-label="Переключить тему">
+
+        ◐
+
+      </button>
+
+    </nav>
+
   </header>
 
-  <!-- Main Grid -->
-  <main class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-    <!-- Обо мне -->
-    <div class="card">
-      <div class="card-content">
-        <img src="logo-borisloff.png" alt="Обо мне">
-        <div class="card-text">
-          <h2 class="text-sm font-bold text-gray-600 dark:text-gray-400 mt-1">Обо мне</h2>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Я - молодой разработчик. Создаю простые и удобные приложения на Android. Работаю над Лофф.Заметками, Эду.Калк, Лофф.Медиа, и другими проектами. Скачивай в RuStore и подписывайся на Telegram, чтобы не пропустить обновления!</p>
+  <main>
+
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+      <div>
+
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Привет! Я
         </div>
+
+        <h1>
+          Borisloff<span>.Dev</span>
+        </h1>
+
+        <p class="hero-description">
+          Молодой разработчик, который создаёт
+          приложения, сервисы и просто
+          интересные проекты. Здесь — мои основные,
+          и немного обо мне.
+        </p>
+
+        <div class="hero-links">
+
+          <a
+            href="#projects"
+            class="button primary">
+
+            Смотреть проекты →
+
+          </a>
+
+          <a
+            href="https://t.me/BorisloffDev"
+            target="_blank"
+            class="button">
+
+            Telegram
+
+          </a>
+
+          <a
+            href="https://github.com/borisloff"
+            target="_blank"
+            class="button">
+
+            GitHub
+
+          </a>
+
+        </div>
+
       </div>
-      <div class="btn-socials mt-3 w-full">
-        <button class="btn-green" onclick="window.open('https://t.me/BorisloffDev', '_blank')">Telegram</button>
-        <button class="btn-green" onclick="window.open('https://www.rustore.ru/catalog/developer/i2eege', '_blank')">RuStore</button>
-        <button class="btn-green" onclick="window.open('https://github.com/borisloff', '_blank')">GitHub</button>
+
+
+      <div class="profile">
+
+        <img
+          src="logo-borisloff.webp"
+          alt="Borisloff">
+
+        <div class="profile-info">
+
+          <div class="profile-name">
+            Borisloff
+          </div>
+
+          <div class="profile-role">
+            Developer · Android · Python · Linux
+          </div>
+
+          <div class="profile-status">
+            <span class="status-dot"></span>
+            Сейчас что-то кодит
+          </div>
+
+        </div>
+
       </div>
+
     </div>
 
-    <!-- Лофф.Медиа -->
-    <div class="card">
-      <div class="card-content">
-        <img src="logo-loff-media.jpg" alt="Лофф.Медиа">
-        <div class="card-text">
-          <h2 class="text-sm font-bold text-gray-600 dark:text-gray-400 mt-1">Лофф.Медиа</h2>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Музыкальные сервисы, видео, радио, картинки — в одном месте.</p>
-        </div>
-      </div>
-      <button class="btn-green mt-3 w-full" onclick="window.open('https://borisloff.github.io/loff-media', '_blank')">Открыть</button>
-    </div>
 
-    <!-- Лофф.Заметки -->
-    <div class="card">
-      <div class="card-content">
-        <img src="logo-loff-notes.jpg" alt="Лофф.Заметки">
-        <div class="card-text">
-          <h2 class="text-sm font-bold text-gray-600 dark:text-gray-400 mt-1">Лофф.Заметки</h2>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Минималистичное приложение для заметок</p>
-        </div>
-      </div>
-      <button class="btn-green mt-3 w-full" onclick="window.open('https://www.rustore.ru/catalog/app/ru.borisloff.dev.loff.notes', '_blank')">Открыть</button>
-    </div>
+    <!-- ABOUT -->
 
-    <!-- Лофф.Оценка -->
-    <div class="card">
-      <div class="card-content">
-        <img src="logo-edu-calc.png" alt="Лофф.Оценка">
-        <div class="card-text">
-          <h2 class="text-sm font-bold text-gray-600 dark:text-gray-400 mt-1">Лофф.Оценка</h2>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Удобное и простое в использовании приложение, предназначенное для расчёта средней оценки</p>
-        </div>
-      </div>
-      <button class="btn-green mt-3 w-full" onclick="window.open('https://www.rustore.ru/catalog/app/ru.borisloff.studio.edu.calc', '_blank')">Открыть</button>
-    </div>
+    <section id="about">
 
-    <!-- Лофф.Чат -->
-    <div class="card">
-      <div class="card-content">
-        <img src="logo-loff-chat.png" alt="Лофф.GPT">
-        <div class="card-text">
-          <h2 class="text-sm font-bold text-gray-600 dark:text-gray-400 mt-1">Лофф.GPT</h2>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Удобный чат-бот с ИИ в Telegram.</p>
-        </div>
+      <div class="section-number">
+        01 — Обо мне
       </div>
-      <button class="btn-green mt-3 w-full" onclick="window.open('https://t.me/LoffGPT_bot', '_blank')">Открыть</button>
-    </div>
+
+      <h2 class="section-title">
+        Немного обо мне
+      </h2>
+
+
+      <div class="about">
+
+        <div class="about-card">
+
+          <p>
+            Я молодой разработчик. Создаю простые
+            и удобные приложения под Android,
+            экспериментирую с вебом и периодически
+            начинаю новые проекты.
+          </p>
+
+        </div>
+
+
+        <div class="about-card">
+
+          <p>
+            Сейчас работаю над Лофф.Чатом,
+            Лофф.Сетевиком, Лофф.Медиа,
+            Лофф.Оценкой, Лофф.Заметками
+            и другими проектами.
+          </p>
+
+
+          <div class="tags">
+
+            <span class="tag">Python</span>
+            <span class="tag">KivyMD</span>
+            <span class="tag">Android</span>
+            <span class="tag">Web</span>
+            <span class="tag">Linux</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section id="projects">
+
+      <div class="section-number">
+        02 — Проекты
+      </div>
+
+      <h2 class="section-title">
+        Что я делаю
+      </h2>
+
+
+      <div class="projects">
+
+
+        <!-- NETWORK -->
+
+        <a
+          href="#"
+          onclick="return false"
+          class="project featured">
+
+          <div class="project-top">
+
+            <img
+              class="project-logo"
+              src="logo-loff-network.webp"
+              alt="Лофф.Сетевик">
+
+            <div class="arrow">
+              ↗
+            </div>
+
+          </div>
+
+
+          <div class="project-info">
+
+            <h3>
+              Лофф.Сетевик
+            </h3>
+
+            <p>
+              Ваш честный гид по интернету.
+              Проверяйте скорость, доступность
+              сервисов, пинг и состояние соединения —
+              без лишних разрешений и рекламы.
+            </p>
+
+
+            <div class="features">
+
+              <span class="feature">
+                Проверка скорости
+              </span>
+
+              <span class="feature">
+                Диагностика
+              </span>
+
+              <span class="feature">
+                Пинг сервисов
+              </span>
+
+              <span class="feature">
+                Проверка IP
+              </span>
+
+              <span class="feature">
+                Без рекламы
+              </span>
+
+            </div>
+
+
+            <span class="project-type">
+              ANDROID · NETWORK
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <!-- MEDIA -->
+
+        <a
+          href="https://borisloff.github.io/loff-media"
+          target="_blank"
+          class="project">
+
+          <div class="project-top">
+
+            <img
+              class="project-logo"
+              src="logo-loff-media.webp"
+              alt="Лофф.Медиа">
+
+            <div class="arrow">
+              ↗
+            </div>
+
+          </div>
+
+
+          <div class="project-info">
+
+            <h3>
+              Лофф.Медиа
+            </h3>
+
+            <p>
+              Музыкальные сервисы, видео,
+              радио и картинки — в одном месте.
+            </p>
+
+            <span class="project-type">
+              WEB
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <!-- NOTES -->
+
+        <a
+          href="https://www.rustore.ru/catalog/app/ru.borisloff.dev.loff.notes"
+          target="_blank"
+          class="project">
+
+          <div class="project-top">
+
+            <img
+              class="project-logo"
+              src="logo-loff-notes.webp"
+              alt="Лофф.Заметки">
+
+            <div class="arrow">
+              ↗
+            </div>
+
+          </div>
+
+
+          <div class="project-info">
+
+            <h3>
+              Лофф.Заметки
+            </h3>
+
+            <p>
+              Минималистичное приложение
+              для заметок.
+            </p>
+
+            <span class="project-type">
+              ANDROID · JSON
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <!-- GRADE -->
+
+        <a
+          href="https://www.rustore.ru/catalog/app/ru.borisloff.studio.edu.calc"
+          target="_blank"
+          class="project">
+
+          <div class="project-top">
+
+            <img
+              class="project-logo"
+              src="logo-edu-calc.webp"
+              alt="Лофф.Оценка">
+
+            <div class="arrow">
+              ↗
+            </div>
+
+          </div>
+
+
+          <div class="project-info">
+
+            <h3>
+              Лофф.Оценка
+            </h3>
+
+            <p>
+              Простое приложение для расчёта
+              средней оценки.
+            </p>
+
+            <span class="project-type">
+              ANDROID · MATH
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <!-- GPT -->
+
+        <a
+          href="https://t.me/LoffGPT_bot"
+          target="_blank"
+          class="project">
+
+          <div class="project-top">
+
+            <img
+              class="project-logo"
+              src="logo-loff-chat.webp"
+              alt="Лофф.GPT">
+
+            <div class="arrow">
+              ↗
+            </div>
+
+          </div>
+
+
+          <div class="project-info">
+
+            <h3>
+              Лофф.Чат
+            </h3>
+
+            <p>
+              Чат-бот с нейросетью
+              прямо в Telegram.
+            </p>
+
+            <span class="project-type">
+              TELEGRAM · AI
+            </span>
+
+          </div>
+
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- CURRENT -->
+
+    <section id="current">
+
+      <div class="section-number">
+        03 — Сейчас
+      </div>
+
+      <h2 class="section-title">
+        Чем занимаюсь сейчас
+      </h2>
+
+
+      <div class="current">
+
+        <div class="current-icon">
+          ✦
+        </div>
+
+
+        <div>
+
+          <strong>
+            Развиваю Лофф.Сетевик и остальные проекты
+          </strong>
+
+          <span>
+            Добавляю новые функции, улучшаю
+            существующие приложения и периодически
+            придумываю что-нибудь новое.
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
 
   </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div>
+      © 2026 <strong>Borisloff.Dev</strong>
+    </div>
+
+    <div>
+      Сделано с интересом к коду :)
+    </div>
+
+  </footer>
+
+
+  <script>
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+    }
+
+
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+
+      localStorage.setItem(
+        "theme",
+        document.body.classList.contains("dark")
+          ? "dark"
+          : "light"
+      );
+    }
+  </script>
+
 </body>
 </html>
